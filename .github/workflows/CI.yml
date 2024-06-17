@@ -37,7 +37,7 @@ jobs:
       
     - name: build
       run: |
-          cd ./week2_PA
+          cd ./jaksim
           chmod +x gradlew
           ./gradlew build -x test
       shell: bash
