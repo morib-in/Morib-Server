@@ -28,13 +28,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ForbiddenException.class)
     protected ResponseEntity<BaseResponse<?>> handleForbiddenException(ForbiddenException e) {
-        log.error(">>> handle: NotFoundException ", e);
+        log.error(">>> handle: ForbiddenException ", e);
         return ApiResponseUtil.failure(ErrorMessage.FORBIDDEN);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
     protected ResponseEntity<BaseResponse<?>> handlerUnauthorizedException(UnauthorizedException e) {
-        log.error(">>> handle: NotFoundException ", e);
+        log.error(">>> handle: UnauthorizedException ", e);
         return ApiResponseUtil.failure(ErrorMessage.UNAUTHORIZED);
     }
 }
