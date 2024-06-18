@@ -17,17 +17,19 @@ public enum ErrorMessage {
     /**
      * 401 Unauthorized
      */
-    JWT_UNAUTHORIZED_EXCEPTION(HttpStatus.UNAUTHORIZED, "e4010", "사용자의 로그인 검증을 실패했습니다."),
-    PASSWORD_NOT_MATCHED_EXCEPTION(HttpStatus.UNAUTHORIZED, "e4010", "해당 유저의 비밀번호가 일치하지 않습니다."),
-    ;
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "e4010", "리소스 접근 권한이 없습니다."),
+    JWT_UNAUTHORIZED_EXCEPTION(HttpStatus.UNAUTHORIZED, "e4011", "사용자의 로그인 검증을 실패했습니다."),
+    PASSWORD_NOT_MATCHED_EXCEPTION(HttpStatus.UNAUTHORIZED, "e4012", "해당 유저의 비밀번호가 일치하지 않습니다."),
 
     /**
      * 403 Forbidden
      */
+    FORBIDDEN(HttpStatus.FORBIDDEN, "e4030", "리소스 접근 권한이 없습니다."),
 
     /**
      * 404 Not Found
      */
+    NOT_FOUND(HttpStatus.NOT_FOUND, "e4040", "대상을 찾을 수 없습니다."),
 
     /**
      * 405 Method Not Allowed
@@ -40,6 +42,7 @@ public enum ErrorMessage {
     /**
      * 500 Internal Server Error
      */
+    ;
 
     private final HttpStatus httpStatus;
     private final String code;
