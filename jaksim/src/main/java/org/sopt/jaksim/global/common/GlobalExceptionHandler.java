@@ -1,38 +1,40 @@
 package org.sopt.jaksim.global.common;
 
-import org.sopt.jaksim.global.common.dto.ErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.sopt.jaksim.global.exception.ForbiddenException;
 import org.sopt.jaksim.global.exception.NotFoundException;
 import org.sopt.jaksim.global.exception.UnauthorizedException;
-import org.springframework.http.HttpStatus;
+import org.sopt.jaksim.global.message.ErrorMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Objects;
-
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse.of(HttpStatus.BAD_REQUEST.value(), Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage()));
+    protected ResponseEntity<BaseResponse<?>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        log.error(">>> handle: MethodArgumentNotValidException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    protected ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.of(e.errorMessage));
+    protected ResponseEntity<BaseResponse<?>> handleNotFoundException(NotFoundException e) {
+        log.error(">>> handle: NotFoundException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.NOT_FOUND);
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    protected ResponseEntity<ErrorResponse> handleForbiddenException(ForbiddenException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponse.of(e.errorMessage));
+    protected ResponseEntity<BaseResponse<?>> handleForbiddenException(ForbiddenException e) {
+        log.error(">>> handle: NotFoundException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.FORBIDDEN);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    protected ResponseEntity<ErrorResponse> handlerUnauthorizedException(UnauthorizedException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ErrorResponse.of(e.getErrorMessage().getStatus(), e.getErrorMessage().getMessage()));
+    protected ResponseEntity<BaseResponse<?>> handlerUnauthorizedException(UnauthorizedException e) {
+        log.error(">>> handle: NotFoundException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.UNAUTHORIZED);
     }
 }
