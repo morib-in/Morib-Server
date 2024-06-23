@@ -22,7 +22,7 @@ jobs:
 
       - name: application.yml 생성
         run: |
-          mkdir -p .jaksim/src/main/resources && cd $_
+          mkdir -p ./jaksim/src/main/resources && cd $_
           touch ./application.yml
           echo "${{ secrets.CD_APPLICATION }}" > ./application.yml
           cat ./application.yml
