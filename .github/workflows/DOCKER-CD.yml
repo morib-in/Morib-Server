@@ -48,6 +48,7 @@ jobs:
 
       - name: docker image 빌드 및 푸시
         run: |
+          cd ./jaksim
           docker build --platform linux/amd64 -t jaksim/jaksim_repo .
           docker push jaksim/jaksim_repo
         working-directory: ${{ env.working-directory }}
