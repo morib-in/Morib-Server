@@ -1,5 +1,6 @@
 package org.sopt.jaksim.global.common;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ public class HealthCheckController {
     private static final String NULL = "";
 
     @GetMapping("/profile")
+    @Operation(summary = "active profile 확인 API", description = "active profile을 확인하는 일종의 Health Check API입니다.")
     public String getProfile() {
         return Arrays.stream(env.getActiveProfiles())
                 .findFirst()
