@@ -12,7 +12,8 @@ public enum SuccessMessage {
      * 200 Ok
      */
     USER_SIGN_UP_SUCCESS(HttpStatus.OK, "s2000", "회원가입이 완료되었습니다."),
-    USER_SIGN_IN_SUCCESS(HttpStatus.OK, "s2000", "로그인이 완료되었습니다."),
+    USER_SIGN_IN_SUCCESS(HttpStatus.OK, "s2001", "로그인이 완료되었습니다."),
+    USER_TOKEN_REISSUE_SUCCESS(HttpStatus.OK, "s2002", "토큰 재발급이 완료되었습니다."),
     ;
 
     /**
