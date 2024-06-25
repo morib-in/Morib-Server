@@ -3,17 +3,20 @@ package org.sopt.jaksim.user.service;
 import lombok.RequiredArgsConstructor;
 import org.sopt.jaksim.auth.UserAuthentication;
 import org.sopt.jaksim.global.common.jwt.JwtTokenProvider;
-import org.sopt.jaksim.global.exception.UnauthorizedException;
+import org.sopt.jaksim.global.exception.NotFoundException;
 import org.sopt.jaksim.global.message.ErrorMessage;
+import org.sopt.jaksim.user.domain.Platform;
+import org.sopt.jaksim.user.domain.RefreshToken;
 import org.sopt.jaksim.user.domain.User;
+import org.sopt.jaksim.user.dto.request.UserReissueRequest;
 import org.sopt.jaksim.user.dto.request.UserSignInRequest;
 import org.sopt.jaksim.user.dto.response.UserSignInResponse;
+import org.sopt.jaksim.user.repository.RedisTokenRepository;
 import org.sopt.jaksim.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Member;
-
+import static org.sopt.jaksim.user.domain.Platform.getEnumPlatformFromStringPlatform;
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -23,46 +26,61 @@ public class UserService {
     private final RedisTokenRepository redisTokenRepository;
 
     @Transactional
-    public UserSignInResponse signIn(UserSignInRequest request) {
-        // 1. 사용자 자격 증명 검증
-        Member member = userRepository.findByUserIdAndPassword(request.getUserId(), request.getPassword())
-                .orElseThrow(() -> new RuntimeException("Invalid credentials")); // 클래스명을 userRepository로 수정
+    public UserSignInResponse signIn(String token, UserSignInRequest request) {
+        Platform platform = getEnumPlatformFromStringPlatform(request.platform());
+        // 플랫폼을 판단한 뒤, 토큰을 넣어서 유저 이메일 추출
+        String userEmail = getUserEmail(token, platform);
 
-        // 2. 토큰 발행
-        Long memberId = member.getId();
-        String accessToken = jwtTokenProvider.issueAccessToken(
-                UserAuthentication.createUserAuthentication(memberId)
-        );
-        String refreshToken = jwtTokenProvider.issueRefreshToken(
-                UserAuthentication.createUserAuthentication(memberId)
-        );
+        // 유저 이메일과 플랫폼으로 유저 찾기
+        User user = getUserByPlatformAndEmail(platform, userEmail);
 
-        // 3. 리프레시 토큰 저장
-        redisTokenRepository.save(Token.of(memberId.toString(), refreshToken));
+        // atk, rtk 발급
+        String accessToken = jwtTokenProvider.issueAccessToken(UserAuthentication.createUserAuthentication(user.getId()));
+        String refreshToken = jwtTokenProvider.issueRefreshToken(UserAuthentication.createUserAuthentication(user.getId()));
 
-        // 4. 토큰 반환
-        return new UserSignInResponse(accessToken, refreshToken, memberId.toString());
+        // redis에 rtk 저장
+        redisTokenRepository.save(RefreshToken.of(user.getId(), refreshToken));
+
+        return UserSignInResponse.of(accessToken, refreshToken, user.getId().toString());
     }
 
-    public UserSignInResponse refreshToken(Long memberId) {
-        if (!redisTokenRepository.existsById(memberId.toString())) {
-            throw new UnauthorizedException("Invalid refresh token"); // 예외 메시지로 수정
-        }
+    public UserSignInResponse reissue(String token, UserReissueRequest userReissueRequest) {
+       Long userId = userReissueRequest.userId();
+       validateRefreshToken(token, userId);
+       User user = getUser(userId);
 
-        // 유저 ID 검증 및 토큰 재발급
-        User user = userRepository.findById(memberId)
-                .orElseThrow(() -> new UnauthorizedException(ErrorMessage.NOT_FOUND));
+       String accessToken = jwtTokenProvider.issueAccessToken(UserAuthentication.createUserAuthentication(userId));
+       String refreshToken = jwtTokenProvider.issueRefreshToken(UserAuthentication.createUserAuthentication(userId));
 
-        String accessToken = jwtTokenProvider.issueAccessToken(
-                UserAuthentication.createUserAuthentication(memberId)
+       updateRefreshToken(refreshToken, user);
+
+        return new UserSignInResponse(accessToken, refreshToken, userId.toString());
+    }
+
+    private User getUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
         );
-        String refreshToken = jwtTokenProvider.issueRefreshToken(
-                UserAuthentication.createUserAuthentication(memberId)
-        );
+    }
 
-        redisTokenRepository.save(Token.of(memberId.toString(), refreshToken)); // 토큰 저장 구문 정리
+    private User getUserByPlatformAndEmail(Platform platform, String userEmail) {
+        return userRepository.findUserByPlatformAndEmail(platform, userEmail).orElseThrow(
+            () -> new NotFoundException(ErrorMessage.NOT_FOUND));
+    }
 
-        return new UserSignInResponse(accessToken, refreshToken, memberId.toString());
+    public String getUserEmail(String token, Platform platform) {
+        // 추후에 다른 소셜로그인 플랫폼이 있을 수도 있으므로 메소드로 분리함
+        // 구글 OAuth 서버에 통신해서 이메일 가져오기
+        return null;
+    }
+
+    private void validateRefreshToken(String refreshToken, Long userId) {
+        // jwt 클래스 따로 만들어서 할 예정
+    }
+
+    private void updateRefreshToken(String refreshToken, User user) {
+        user.setRefreshToken(refreshToken);
+        redisTokenRepository.save(RefreshToken.of(user.getId(), refreshToken));
     }
 }
 

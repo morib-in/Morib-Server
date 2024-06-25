@@ -8,6 +8,7 @@ import org.sopt.jaksim.global.common.BaseTimeEntity;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
+@Setter
 @Table(name = "users")
 @Entity
 public class User extends BaseTimeEntity {
