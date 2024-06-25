@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.jaksim.auth.UserAuthentication;
 import org.sopt.jaksim.auth.jwt.JwtTokenProvider;
 import org.sopt.jaksim.global.exception.NotFoundException;
-
 import org.sopt.jaksim.global.message.ErrorMessage;
 import org.sopt.jaksim.user.domain.Platform;
 import org.sopt.jaksim.user.domain.RefreshToken;
