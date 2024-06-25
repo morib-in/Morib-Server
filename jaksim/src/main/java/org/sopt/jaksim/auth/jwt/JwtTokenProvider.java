@@ -1,4 +1,4 @@
-package org.sopt.jaksim.global.common.jwt;
+package org.sopt.jaksim.auth.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.sopt.jaksim.auth.UserAuthentication;
-import org.sopt.jaksim.global.common.jwt.JwtTokenProvider;
+import org.sopt.jaksim.auth.jwt.JwtTokenProvider;
 import org.sopt.jaksim.global.exception.UnauthorizedException;
 import org.sopt.jaksim.global.message.ErrorMessage;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-import static org.sopt.jaksim.global.common.jwt.JwtValidationType.VALID_JWT;
+import static org.sopt.jaksim.auth.jwt.JwtValidationType.VALID_JWT;
 
 @Component
 @RequiredArgsConstructor
