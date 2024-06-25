@@ -2,6 +2,7 @@ package org.sopt.jaksim.user.api;
 
 import lombok.RequiredArgsConstructor;
 import org.sopt.jaksim.auth.PrincipalHandler;
+import org.sopt.jaksim.global.common.ApiResponseUtil;
 import org.sopt.jaksim.global.common.BaseResponse;
 import org.sopt.jaksim.global.message.SuccessMessage;
 import org.sopt.jaksim.user.dto.request.UserReissueRequest;
@@ -33,12 +34,10 @@ public class UserApiController {
 //
 
     @PostMapping("/reissue")
-    public ResponseEntity<UserSignInResponse> reissue(@RequestHeader(AUTHORIZATION) final String refreshToken,
+    public ResponseEntity<BaseResponse<?>> reissue(@RequestHeader(AUTHORIZATION) final String refreshToken,
                                                       @RequestBody final UserReissueRequest userReissueRequest) {
         UserSignInResponse response = userFacade.reissue(refreshToken, userReissueRequest);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header("Location", response.userId())
-                .body(response);
+        return ApiResponseUtil.success(SuccessMessage.USER_TOKEN_REISSUE_SUCCESS, response);
     }
 
 }
