@@ -45,4 +45,10 @@ public class GlobalExceptionHandler {
         log.error(">>> handle: IOException ", e);
         return ApiResponseUtil.failure(ErrorMessage.BAD_REQUEST);
     }
+
+    @ExceptionHandler(OAuthException.class)
+    protected ResponseEntity<BaseResponse<?>> handlerOAuthException(OAuthException e) {
+        log.error(">>> handle: OAuthException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.INVALID_GRANT_BY_OAUTH);
+    }
 }
