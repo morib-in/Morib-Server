@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.sopt.jaksim.global.common.Constants.ACTIVATE_PROFILE_URL;
-import static org.sopt.jaksim.global.common.Constants.WEB_SOCKET_SERVER_URL;
 
 @Configuration
 @RequiredArgsConstructor
