@@ -37,7 +37,6 @@ public class UserApiController implements UserApi{
         final UserSignInResponse response = userFacade.signin();
         return ApiResponseUtil.success(SuccessMessage.USER_SIGN_IN_SUCCESS, response);
     }
-//
 
     @PostMapping("/reissue")
     public ResponseEntity<BaseResponse<?>> reissue(@RequestHeader(AUTHORIZATION) final String refreshToken,

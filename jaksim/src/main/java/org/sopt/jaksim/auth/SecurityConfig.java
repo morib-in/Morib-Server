@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.RequestCacheConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     private static final String[] AUTH_WHITE_LIST = {ACTIVATE_PROFILE_URL,
-            WEB_SOCKET_SERVER_URL, "/login/**", "/api/v1/auth/**",
+             "/login/**", "/api/v1/auth/**",
             "/swagger-ui/**", "/swagger-resources/**"};
 
     @Bean
