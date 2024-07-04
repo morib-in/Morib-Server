@@ -29,7 +29,8 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     private static final String[] AUTH_WHITE_LIST = {ACTIVATE_PROFILE_URL,
-             "/login/**", "/api/v1/auth/**",
+             "/api/v1/user/signin/**", "/api/v1/auth/**",
+            "/api/v1/user/reissue/**", "/socket.io/**",
             "/swagger-ui/**", "/swagger-resources/**"};
 
     @Bean

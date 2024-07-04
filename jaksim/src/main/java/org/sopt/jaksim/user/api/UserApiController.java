@@ -32,13 +32,13 @@ public class UserApiController implements UserApi{
     }
 
     @Override
-    @PostMapping("/user/signin")
+    @PostMapping("/users/signin")
     public ResponseEntity<BaseResponse<?>> signin(@RequestHeader(AUTHORIZATION) final String accessToken) {
         final UserSignInResponse response = userFacade.signin();
         return ApiResponseUtil.success(SuccessMessage.USER_SIGN_IN_SUCCESS, response);
     }
 
-    @PostMapping("/reissue")
+    @PostMapping("/users/reissue")
     public ResponseEntity<BaseResponse<?>> reissue(@RequestHeader(AUTHORIZATION) final String refreshToken,
                                                       @RequestBody final UserReissueRequest userReissueRequest) {
         UserSignInResponse response = userFacade.reissue(refreshToken, userReissueRequest);
