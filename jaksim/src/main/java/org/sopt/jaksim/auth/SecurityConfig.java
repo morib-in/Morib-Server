@@ -30,8 +30,8 @@ public class SecurityConfig {
 
     private static final String[] AUTH_WHITE_LIST = {
             ACTIVATE_PROFILE_URL,
-             "/api/v1/user/signin/**", "/api/v1/auth/**",
-            "/api/v1/user/reissue/**", "/socket.io/**",
+             "/api/v1/users/signin/**", "/api/v1/auth/**",
+            "/api/v1/users/reissue/**", "/socket.io/**",
             "/swagger-ui/**", "/swagger-resources/**"};
 
     @Bean
