@@ -1,6 +1,7 @@
 package org.sopt.jaksim.user.facade;
 
 import lombok.RequiredArgsConstructor;
+import org.sopt.jaksim.user.domain.User;
 import org.sopt.jaksim.user.dto.Tokens;
 import org.sopt.jaksim.user.dto.UserInfo;
 import org.sopt.jaksim.user.dto.request.UserSignUpRequest;
@@ -28,6 +29,9 @@ public class UserFacade {
         return userService.reissue(refreshToken, userReissueRequest);
     }
 
+    public User getUserByPrincipal() {
+        return userService.getUserByPrincipal();
+    }
 
 
 }
