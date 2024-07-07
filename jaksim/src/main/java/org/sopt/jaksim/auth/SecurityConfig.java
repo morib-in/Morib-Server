@@ -28,7 +28,8 @@ public class SecurityConfig {
     private final CustomJwtAuthenticationEntryPoint customJwtAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
-    private static final String[] AUTH_WHITE_LIST = {ACTIVATE_PROFILE_URL,
+    private static final String[] AUTH_WHITE_LIST = {
+            ACTIVATE_PROFILE_URL,
              "/api/v1/user/signin/**", "/api/v1/auth/**",
             "/api/v1/user/reissue/**", "/socket.io/**",
             "/swagger-ui/**", "/swagger-resources/**"};

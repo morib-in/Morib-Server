@@ -1,0 +1,20 @@
+package org.sopt.jaksim.task.domain;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.sopt.jaksim.global.common.BaseTimeEntity;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder(access = AccessLevel.PRIVATE)
+@Getter
+@Setter
+@Table(name = "todos")
+@Entity
+public class Todo extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
+    private Long userId;
+}

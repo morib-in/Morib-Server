@@ -14,7 +14,6 @@ import org.sopt.jaksim.global.common.BaseTimeEntity;
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long id;
     @Column(nullable = false)
     private String email;
@@ -22,6 +21,7 @@ public class User extends BaseTimeEntity {
     private String name;
     @Enumerated(EnumType.STRING)
     private Platform platform;
+    private String imageUrl;
     private String refreshToken;
 
     public static User createUser(String email, String name) {
