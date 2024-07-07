@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "tasks")
 @Entity
 public class Task extends BaseTimeEntity {
     @Id

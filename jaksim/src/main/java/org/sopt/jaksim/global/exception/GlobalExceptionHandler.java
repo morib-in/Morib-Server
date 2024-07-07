@@ -35,20 +35,26 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    protected ResponseEntity<BaseResponse<?>> handlerUnauthorizedException(UnauthorizedException e) {
+    protected ResponseEntity<BaseResponse<?>> handleUnauthorizedException(UnauthorizedException e) {
         log.error(">>> handle: UnauthorizedException ", e);
         return ApiResponseUtil.failure(ErrorMessage.UNAUTHORIZED);
     }
 
     @ExceptionHandler(IOException.class)
-    protected ResponseEntity<BaseResponse<?>> handlerIOException(IOException e) {
+    protected ResponseEntity<BaseResponse<?>> handleIOException(IOException e) {
         log.error(">>> handle: IOException ", e);
         return ApiResponseUtil.failure(ErrorMessage.BAD_REQUEST);
     }
 
     @ExceptionHandler(OAuthException.class)
-    protected ResponseEntity<BaseResponse<?>> handlerOAuthException(OAuthException e) {
+    protected ResponseEntity<BaseResponse<?>> handleOAuthException(OAuthException e) {
         log.error(">>> handle: OAuthException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.INVALID_GRANT_BY_OAUTH);
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    protected ResponseEntity<BaseResponse<?>> handleDateTimeParseException(DateTimeParseException e) {
+        log.error(">>> handle: DateTimeParseException ", e);
         return ApiResponseUtil.failure(ErrorMessage.INVALID_GRANT_BY_OAUTH);
     }
 }

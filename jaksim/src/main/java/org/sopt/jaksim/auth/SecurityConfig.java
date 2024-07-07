@@ -32,7 +32,8 @@ public class SecurityConfig {
             ACTIVATE_PROFILE_URL,
              "/api/v1/users/signin/**", "/api/v1/auth/**",
             "/api/v1/users/reissue/**", "/socket.io/**",
-            "/swagger-ui/**", "/swagger-resources/**"};
+            "/swagger-ui/**", "/swagger-resources/**",
+            "/api/v1/**"};
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

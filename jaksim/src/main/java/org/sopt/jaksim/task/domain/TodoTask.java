@@ -9,7 +9,6 @@ import org.sopt.jaksim.global.common.BaseTimeEntity;
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "todo_tasks")
 @Entity
 public class TodoTask extends BaseTimeEntity {
     @Id

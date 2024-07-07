@@ -9,7 +9,6 @@ import org.sopt.jaksim.global.common.BaseTimeEntity;
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "task_msets")
 public class TaskMset extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
