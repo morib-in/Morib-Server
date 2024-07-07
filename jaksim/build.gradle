@@ -68,6 +68,10 @@ dependencies {
 
     // JSONObject
     implementation 'org.json:json:20210307'
+
+    //
+    implementation 'org.jsoup:jsoup:1.14.3'
+
 }
 
 tasks.named('test') {
