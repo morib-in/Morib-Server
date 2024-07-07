@@ -9,7 +9,6 @@ import org.sopt.jaksim.global.common.BaseTimeEntity;
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "todos")
 @Entity
 public class Todo extends BaseTimeEntity {
     @Id

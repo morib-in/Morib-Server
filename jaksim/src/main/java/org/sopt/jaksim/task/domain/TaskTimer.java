@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "task_timers")
 @Entity
 public class TaskTimer extends BaseTimeEntity {
     @Id

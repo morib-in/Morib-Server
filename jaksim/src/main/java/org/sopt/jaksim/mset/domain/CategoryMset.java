@@ -9,7 +9,6 @@ import org.sopt.jaksim.global.common.BaseTimeEntity;
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "category_msets")
 @Entity
 public class CategoryMset extends BaseTimeEntity {
     @Id
