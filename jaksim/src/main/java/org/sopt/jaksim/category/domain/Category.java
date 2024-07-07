@@ -25,4 +25,13 @@ public class Category extends BaseTimeEntity {
     @Column(nullable = false)
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public static Category create(String name, Long userId, LocalDate startDate, LocalDate endDate) {
+        return Category.builder()
+                .name(name)
+                .userId(userId)
+                .startDate(startDate)
+                .endDate(endDate)
+                .build();
+    }
 }

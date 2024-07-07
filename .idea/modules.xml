@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Jaksim-Server.iml" filepath="$PROJECT_DIR$/.idea/Jaksim-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jaksim.main.iml" filepath="$PROJECT_DIR$/.idea/modules/jaksim.main.iml" />
     </modules>
   </component>
 </project>

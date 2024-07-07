@@ -19,4 +19,11 @@ public class CategoryMset extends BaseTimeEntity {
     private Long categoryId;
     @Column(nullable = false)
     private Long msetId;
+
+    public static CategoryMset create(Long categoryId, Long msetId) {
+        return CategoryMset.builder()
+                .categoryId(categoryId)
+                .msetId(msetId)
+                .build();
+    }
 }
