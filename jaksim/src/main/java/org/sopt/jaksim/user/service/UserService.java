@@ -128,7 +128,6 @@ public class UserService {
         params.add("client_secret", CLIENT_SECRET);
         params.add("grant_type", "authorization_code");
         params.add("redirect_uri", REDIRECT_URL);
-
         return new HttpEntity<>(params, headers);
     }
 

@@ -19,4 +19,11 @@ public class Mset extends BaseTimeEntity {
     private String name;
     @Column(nullable = false)
     private String url;
+
+    public static Mset create(String name, String url) {
+        return Mset.builder()
+                .name(name)
+                .url(url)
+                .build();
+    }
 }
