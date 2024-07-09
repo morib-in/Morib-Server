@@ -9,8 +9,10 @@ import org.sopt.jaksim.global.common.BaseResponse;
 import org.sopt.jaksim.global.exception.IOException;
 import org.sopt.jaksim.global.message.ErrorMessage;
 import org.sopt.jaksim.global.message.SuccessMessage;
+import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.dto.FetchTitleRequest;
 import org.sopt.jaksim.task.dto.FetchTitleResponse;
+import org.sopt.jaksim.task.dto.TaskCreateRequest;
 import org.sopt.jaksim.task.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +37,12 @@ public class TaskApiController {
         } catch (IOException | java.io.IOException e) {
             throw new IOException(ErrorMessage.INVALID_URL);
         }
+    }
+
+    @PostMapping("/categories/{categoryId}")
+    public ResponseEntity<BaseResponse<?>> create(@PathVariable("categoryId") Long categoryId,
+                                                  @RequestBody TaskCreateRequest taskCreateRequest) {
+        taskService.create(categoryId, taskCreateRequest);
+        return ApiResponseUtil.success(SuccessMessage.SUCCESS);
     }
 }
