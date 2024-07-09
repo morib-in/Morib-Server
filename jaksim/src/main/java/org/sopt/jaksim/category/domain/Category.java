@@ -23,10 +23,10 @@ public class Category extends BaseTimeEntity {
     @Column(nullable = false)
     private Long userId;
     @Column(nullable = false)
-    private String startDate;
-    private String endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public static Category create(String name, Long userId, String startDate, String endDate) {
+    public static Category create(String name, Long userId, LocalDate startDate, LocalDate endDate) {
         return Category.builder()
                 .name(name)
                 .userId(userId)
