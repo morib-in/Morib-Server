@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.sopt.jaksim.global.common.BaseTimeEntity;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
@@ -16,4 +18,6 @@ public class Todo extends BaseTimeEntity {
     private Long id;
     @Column(nullable = false)
     private Long userId;
+    @Column(nullable = false)
+    private LocalDate targetDate;
 }

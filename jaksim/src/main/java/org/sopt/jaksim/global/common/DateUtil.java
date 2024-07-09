@@ -12,6 +12,7 @@ public class DateUtil {
 
     public static LocalDate stringToDate(String dateString) {
         try {
+            if (dateString == null) return null;
             return LocalDate.parse(dateString, DATE_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DateTimeParseException(ErrorMessage.INVALID_DATE_FORMAT);
