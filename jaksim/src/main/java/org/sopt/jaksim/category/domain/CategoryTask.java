@@ -18,5 +18,5 @@ public class CategoryTask extends BaseTimeEntity {
     @Column(nullable = false)
     private Long taskId;
     @Column(nullable = false)
-    private Long todoId;
+    private Long categoryId;
 }
