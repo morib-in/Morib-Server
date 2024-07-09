@@ -3,6 +3,9 @@ package org.sopt.jaksim.category.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.sopt.jaksim.global.common.BaseTimeEntity;
+import org.sopt.jaksim.task.domain.Task;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -19,4 +22,13 @@ public class CategoryTask extends BaseTimeEntity {
     private Long taskId;
     @Column(nullable = false)
     private Long categoryId;
+
+    public static CategoryTask create(Long categoryId, Long taskId) {
+        return CategoryTask.builder()
+                .categoryId(categoryId)
+                .taskId(taskId)
+                .build();
+    }
 }
+
+
