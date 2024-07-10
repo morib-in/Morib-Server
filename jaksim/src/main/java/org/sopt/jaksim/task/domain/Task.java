@@ -21,8 +21,17 @@ public class Task extends BaseTimeEntity {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private boolean isEnd;
+    private boolean isComplete;
     @Column(nullable = false)
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public static Task create(String name, LocalDate startDate, LocalDate endDate) {
+        return Task.builder()
+                .name(name)
+                .isComplete(false)
+                .startDate(startDate)
+                .endDate(endDate)
+                .build();
+    }
 }
