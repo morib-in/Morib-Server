@@ -45,4 +45,11 @@ public class TaskApiController {
         taskService.create(categoryId, taskCreateRequest);
         return ApiResponseUtil.success(SuccessMessage.SUCCESS);
     }
+
+    @PatchMapping("/tasks/{taskId}/status")
+    public ResponseEntity<BaseResponse<?>> toggleTaskStatus(@PathVariable("taskId") Long taskId) {
+        taskService.toggleTaskCompletionStatus(taskId);
+        return ApiResponseUtil.success(SuccessMessage.SUCCESS);
+    }
+
 }

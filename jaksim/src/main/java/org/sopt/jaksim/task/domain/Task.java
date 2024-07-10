@@ -21,7 +21,7 @@ public class Task extends BaseTimeEntity {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private boolean isComplete;
+    private Boolean isComplete;
     @Column(nullable = false)
     private LocalDate startDate;
     private LocalDate endDate;
