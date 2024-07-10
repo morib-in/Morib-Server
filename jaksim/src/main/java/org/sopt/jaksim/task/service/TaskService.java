@@ -46,4 +46,12 @@ public class TaskService {
 
         categoryTaskRepository.save(categoryTask);
     }
+
+    public void toggleTaskCompletionStatus(Long taskId) {
+        Task task = taskRepository.findById(taskId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        );
+        task.setIsComplete(!task.getIsComplete());
+        taskRepository.save(task);
+    }
 }
