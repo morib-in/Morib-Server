@@ -3,6 +3,7 @@ package org.sopt.jaksim.task.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.sopt.jaksim.global.common.BaseTimeEntity;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -20,4 +21,10 @@ public class Todo extends BaseTimeEntity {
     private Long userId;
     @Column(nullable = false)
     private LocalDate targetDate;
+
+    public static Todo init(Long userId) {
+        return Todo.builder()
+                .userId(userId)
+                .build();
+    }
 }
