@@ -26,10 +26,10 @@ public class UserTimerService {
         if (!isToday(targetDate)) {
             throw new InvalidValueException(ErrorMessage.IS_NOT_TODAY);
         }
-        User user = userFacade.getUserByPrincipal();
-        UserTimer userTimer = getUserTimerByUserIdAndTargetDate(user.getId(), targetDate);
+//        User user = userFacade.getUserByPrincipal();
+        UserTimer userTimer = getUserTimerByUserIdAndTargetDate(1L, targetDate);
         if (userTimer == null) {
-            userTimer = userTimerRepository.save(UserTimer.create(user.getId(), targetDate));
+            userTimer = userTimerRepository.save(UserTimer.create(1L, targetDate));
         }
         return TotalTimeTodayResponse.of(targetDate, userTimer.getTargetTime());
     }
