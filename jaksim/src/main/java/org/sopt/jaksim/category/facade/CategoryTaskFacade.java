@@ -1,12 +1,14 @@
-package org.sopt.jaksim.category.service;
+package org.sopt.jaksim.category.facade;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sopt.jaksim.category.domain.Category;
 import org.sopt.jaksim.category.dto.CategoryTaskLink;
 import org.sopt.jaksim.category.dto.FilteredResourceResponse;
+import org.sopt.jaksim.category.service.CategoryService;
 import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.service.TaskService;
+import org.sopt.jaksim.user.domain.User;
 import org.sopt.jaksim.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 

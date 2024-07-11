@@ -60,4 +60,5 @@ public interface UserApi {
     @PostMapping("/user/signin")
     public ResponseEntity<BaseResponse<?>> signin(@RequestHeader(AUTHORIZATION) final String accessToken);
 
+
 }
