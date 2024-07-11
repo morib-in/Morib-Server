@@ -32,8 +32,8 @@ public class SecurityConfig {
             ACTIVATE_PROFILE_URL,
              "/api/v1/users/signin/**", "/api/v1/auth/**",
             "/api/v1/users/reissue/**", "/socket.io/**",
-            "/swagger-ui/**", "/swagger-resources/**",
-            "/api/v1/**"};
+            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",
+            "/api/v1/**", "/api/v1/timer/**"};
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -48,6 +48,7 @@ public class SecurityConfig {
                     configuration.setExposedHeaders(Collections.singletonList("Authorization"));
                     return configuration;
                 }));
+
         http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .requestCache(RequestCacheConfigurer::disable)
@@ -57,7 +58,6 @@ public class SecurityConfig {
                     exception.authenticationEntryPoint(customJwtAuthenticationEntryPoint);
                     exception.accessDeniedHandler(customAccessDeniedHandler);
                 });
-
 
         http.authorizeHttpRequests((auth) -> auth
             .requestMatchers(AUTH_WHITE_LIST).permitAll()

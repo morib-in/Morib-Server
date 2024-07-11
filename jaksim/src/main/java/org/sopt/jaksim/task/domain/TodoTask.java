@@ -18,4 +18,14 @@ public class TodoTask extends BaseTimeEntity {
     private Long taskId;
     @Column(nullable = false)
     private Long todoId;
+    @Column(nullable = false)
+    private int taskOrder;
+
+    public static TodoTask create(Long taskId, Long todoId, int taskOrder) {
+        return TodoTask.builder()
+                .taskId(taskId)
+                .todoId(todoId)
+                .taskOrder(taskOrder)
+                .build();
+    }
 }

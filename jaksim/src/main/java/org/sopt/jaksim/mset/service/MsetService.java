@@ -3,6 +3,8 @@ package org.sopt.jaksim.mset.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sopt.jaksim.category.dto.CategoryCreateRequest;
+import org.sopt.jaksim.global.exception.NotFoundException;
+import org.sopt.jaksim.global.message.ErrorMessage;
 import org.sopt.jaksim.mset.domain.CategoryMset;
 import org.sopt.jaksim.mset.domain.Mset;
 import org.sopt.jaksim.mset.repository.CategoryMsetRepository;
@@ -21,10 +23,14 @@ public class MsetService {
 
     public void createByCategory(CategoryCreateRequest categoryCreateRequest, Long categoryId) {
         List<Mset> msetList = categoryCreateRequest.msets();
-
         for (Mset mset : msetList) {
             msetRepository.save(Mset.create(mset.getName(), mset.getUrl()));
             categoryMsetRepository.save(CategoryMset.create(categoryId, mset.getId()));
         }
     }
+
+    public Mset getMsetById(Long msetId) {
+        return msetRepository.findById(msetId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        );    }
 }

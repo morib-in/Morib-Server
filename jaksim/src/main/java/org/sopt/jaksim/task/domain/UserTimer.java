@@ -1,22 +1,22 @@
 package org.sopt.jaksim.task.domain;
 
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.index.Indexed;
+import org.sopt.jaksim.global.common.BaseTimeEntity;
 
-import java.time.LocalDate;
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@RedisHash(value = "user_timer", timeToLive = 60 * 60 * 24 * 1000L)
-public class UserTimer {
+@Entity
+public class UserTimer extends BaseTimeEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private Long userId;
-    @Indexed
+    @Column(nullable = false)
     private String targetDate;
     private int targetTime;
 
