@@ -53,6 +53,12 @@ public class CategoryService {
         return categoryRepository.findByUserIdWithRange(userId, startDate, endDate);
     }
 
+    public Category getCategoryById(Long categoryId) {
+        return categoryRepository.findById(categoryId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        );
+    }
+
     public List<CategoryTaskLink> getCategoryTaskByCategories(List<Category> categoryList) {
         List<CategoryTaskLink> categoryTaskLinkList = new ArrayList<>();
         for (Category category : categoryList) {
