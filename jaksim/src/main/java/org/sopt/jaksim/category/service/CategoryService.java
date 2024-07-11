@@ -3,23 +3,28 @@ package org.sopt.jaksim.category.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sopt.jaksim.category.domain.Category;
+import org.sopt.jaksim.category.dto.CategoryCheckResponse;
 import org.sopt.jaksim.category.domain.CategoryTask;
 import org.sopt.jaksim.category.dto.CategoryCreateRequest;
 import org.sopt.jaksim.category.dto.CategoryTaskLink;
 import org.sopt.jaksim.category.repository.CategoryRepository;
 import org.sopt.jaksim.category.repository.CategoryTaskRepository;
 import org.sopt.jaksim.global.common.DateUtil;
+import org.sopt.jaksim.global.exception.NotFoundException;
+import org.sopt.jaksim.global.message.ErrorMessage;
 import org.sopt.jaksim.mset.service.MsetService;
 
 import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.repository.TaskRepository;
 import org.sopt.jaksim.task.service.TaskService;
+import org.sopt.jaksim.user.domain.User;
 import org.sopt.jaksim.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -70,4 +75,19 @@ public class CategoryService {
                 category.getStartDate().equals(idxDate) ||
                 category.getEndDate().equals(idxDate);
     }
+
+
+    public List<CategoryCheckResponse> getCategoriesByUserId() {
+        // userId -> user pk -> Long -> SecurityContextHolder Authentication 객체
+        // principal handler
+        Long userId = userFacade.getUserByPrincipal().getId();
+        List<Category> categories = categoryRepository.findByUserId(userId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        );
+        return categories.stream() //리스트를 스트림으로 변환
+                //각 category 객체를 CategoryCheckResponse 객체로 변환
+                .map(category -> CategoryCheckResponse.of(category.getId(), category.getName(), category.getStartDate(), category.getEndDate()))
+                .collect(Collectors.toList()); //변환된 스트림을 리스트로 수집
+    }
 }
+
