@@ -2,10 +2,13 @@ package org.sopt.jaksim.task.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.sopt.jaksim.task.domain.TaskTimer;
 import org.sopt.jaksim.task.domain.Todo;
 import org.sopt.jaksim.task.domain.TodoTask;
+import org.sopt.jaksim.task.repository.TaskTimerRepository;
 import org.sopt.jaksim.task.repository.TodoRepository;
 import org.sopt.jaksim.task.repository.TodoTaskRepository;
+import org.sopt.jaksim.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,8 +18,9 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class TodoTaskService {
+    private final TaskTimerRepository taskTimerRepository;
     private final TodoTaskRepository todoTaskRepository;
-
+    private final UserFacade userFacade;
     public void excute(Todo todo, List<Long> newTaskIdList) {
         // 새로운 태스크들을 TodoTask로 생성
         List<TodoTask> newTodoTask = new ArrayList<>();
@@ -46,6 +50,7 @@ public class TodoTaskService {
         for (TodoTask newTask : current) {
             if (!oldTaskMap.containsKey(newTask.getTaskId())) {
                 oldTaskMap.put(newTask.getTaskId(), newTask);
+                taskTimerRepository.save(TaskTimer.create(userFacade.getUserByPrincipal().getId(), newTask.getTaskId()));
             }
         }
 
