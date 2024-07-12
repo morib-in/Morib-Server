@@ -11,6 +11,7 @@ import org.sopt.jaksim.task.dto.TotalTimeTodayResponse;
 import org.sopt.jaksim.task.repository.UserTimerRepository;
 import org.sopt.jaksim.user.domain.User;
 import org.sopt.jaksim.user.facade.UserFacade;
+import org.springframework.data.relational.core.dialect.LockClause;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,7 +23,7 @@ public class UserTimerService {
     private final UserTimerRepository userTimerRepository;
     private final UserFacade userFacade;
 
-    public TotalTimeTodayResponse getTotalTimeToday(String targetDate) {
+    public TotalTimeTodayResponse getTotalTimeToday(LocalDate targetDate) {
         if (!isToday(targetDate)) {
             throw new InvalidValueException(ErrorMessage.IS_NOT_TODAY);
         }
@@ -34,21 +35,23 @@ public class UserTimerService {
         return TotalTimeTodayResponse.of(targetDate, userTimer.getTargetTime());
     }
 
-    public boolean isToday(String targetDate) {
-        if (!LocalDate.now().equals(DateUtil.stringToDate(targetDate))) {
+    public boolean isToday(LocalDate targetDate) {
+        if (!LocalDate.now().equals(targetDate)) {
             return false;
         }
         return true;
     }
 
-    public UserTimer getUserTimerByUserIdAndTargetDate(Long userId, String targetDate) {
+    public UserTimer getUserTimerByUserIdAndTargetDate(Long userId, LocalDate targetDate) {
         return userTimerRepository.findByUserIdAndTargetDate(userId, targetDate);
     }
 
     public void calculateUserTimerOnStop(StopTimerRequest stopTimerRequest) {
-        User user = userFacade.getUserByPrincipal();
-        UserTimer userTimer = userTimerRepository.findByUserId(user.getId());
+//        User user = userFacade.getUserByPrincipal();
+//        user.getId()
+        UserTimer userTimer = userTimerRepository.findByUserIdAndTargetDate(1L, stopTimerRequest.targetDate());
         userTimer.setTargetTime(userTimer.getTargetTime() + stopTimerRequest.elapsedTime());
+        userTimerRepository.save(userTimer);
     }
 
 }

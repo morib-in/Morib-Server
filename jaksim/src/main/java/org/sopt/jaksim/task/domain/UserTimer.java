@@ -3,6 +3,9 @@ package org.sopt.jaksim.task.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.sopt.jaksim.global.common.BaseTimeEntity;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -17,10 +20,10 @@ public class UserTimer extends BaseTimeEntity {
     @Column(nullable = false)
     private Long userId;
     @Column(nullable = false)
-    private String targetDate;
+    private LocalDate targetDate;
     private int targetTime;
 
-    public static UserTimer create(Long userId, String targetDate) {
+    public static UserTimer create(Long userId, LocalDate targetDate) {
         return UserTimer.builder()
                 .userId(userId)
                 .targetDate(targetDate)

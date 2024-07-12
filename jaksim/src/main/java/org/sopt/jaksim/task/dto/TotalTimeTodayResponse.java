@@ -1,10 +1,12 @@
 package org.sopt.jaksim.task.dto;
 
+import java.time.LocalDate;
+
 public record TotalTimeTodayResponse(
-        String targetDate,
+        LocalDate targetDate,
         int targetTime
 ) {
-    public static TotalTimeTodayResponse of(String targetDate, int targetTime) {
+    public static TotalTimeTodayResponse of(LocalDate targetDate, int targetTime) {
         return new TotalTimeTodayResponse(targetDate, targetTime);
     }
 }

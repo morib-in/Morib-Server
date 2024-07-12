@@ -1,7 +1,9 @@
 package org.sopt.jaksim.task.dto;
 
+import java.time.LocalDate;
+
 public record StopTimerRequest(
-        String targetDate,
+        LocalDate targetDate,
         int elapsedTime
 ) {
 }
