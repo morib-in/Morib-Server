@@ -12,8 +12,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         Info info = new Info()
-                .title("Jaksim Swagger")
-                .description("Jaksim Swagger dev API")
+                .title("Morib 스웩")
+                .description("Morib Swagger")
                 .version("v1");
 
         return new OpenAPI()
