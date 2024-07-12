@@ -30,7 +30,7 @@ public class TimerApiController {
     private final TodoService todoService;
 
     @GetMapping("/timer")
-    public ResponseEntity<BaseResponse<?>> getTotalTimeToday(@RequestParam("targetDate") String targetDate) {
+    public ResponseEntity<BaseResponse<?>> getTotalTimeToday(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate targetDate) {
         TotalTimeTodayResponse response = userTimerService.getTotalTimeToday(targetDate);
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, response);
     }
