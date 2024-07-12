@@ -60,9 +60,8 @@ public class TaskService {
     }
 
     public List<Task> getTasksByTodoTask(List<TodoTask> todoTaskList) {
-        List<Long> taskIdList = todoTaskList.stream().map(TodoTask::getId).collect(Collectors.toList());
+        List<Long> taskIdList = todoTaskList.stream().map(TodoTask::getTaskId).collect(Collectors.toList());
         return taskRepository.findAllById(taskIdList);
-
     }
 
 }
