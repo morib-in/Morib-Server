@@ -2,6 +2,8 @@ package org.sopt.jaksim.task.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.sopt.jaksim.global.exception.NotFoundException;
+import org.sopt.jaksim.global.message.ErrorMessage;
 import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.domain.TaskTimer;
 import org.sopt.jaksim.task.domain.Todo;
@@ -55,15 +57,21 @@ public class TodoService {
     public TodoCardResponse getTodoCard(LocalDate targetDate) {
         //        Long userId = userFacade.getUserByPrincipal().getId();
         Long userId = 1L;
+        // 유저의 오늘 할일을 찾기 ok
         Todo todo = todoRepository.findByUserIdAndTargetDate(userId, targetDate);
+        // 할일에 등록된 todoTask를 가져오기 ok
         List<TodoTask> todoTaskList = todoTaskService.getTodoTaskByTodoId(todo.getId());
-        Map<Long, TodoTask> todoTaskMap = todoTaskService.getTodoTaskByTodoId(todo.getId()).stream().collect(Collectors.toMap(TodoTask::getTaskId, task -> task));
-        int targetTime = userTimerService.getTotalTimeToday(String.valueOf(targetDate)).targetTime();
+        // 오늘 나의 작업시간 조회
+        int targetTime = userTimerService.getTotalTimeToday(targetDate).targetTime();
+        // 할일에 등록된 task들 가져오기
         List<Task> taskList = taskService.getTasksByTodoTask(todoTaskList);
-        Map<Long, TaskTimer> taskTimerMap = taskTimerService.getTaskTimerMapByTaskList(taskList);
+        Map<Long, TaskTimer> taskTimerMap = taskTimerService.getTaskTimerMapByTaskList(userId, targetDate, taskList);
         List<TaskInTodoCard> taskInTodoCardList = new ArrayList<>();
         for (Task task : taskList) {
-            taskInTodoCardList.add(TaskInTodoCard.of(task, taskTimerMap.get(task.getId())));
+            if (taskTimerMap.get(task.getId()) == null) {
+                throw new NotFoundException(ErrorMessage.NOT_FOUND);
+            }
+            else taskInTodoCardList.add(TaskInTodoCard.of(task, taskTimerMap.get(task.getId())));
         }
         return TodoCardResponse.of(targetTime, taskInTodoCardList);
     }
