@@ -6,9 +6,9 @@ import org.sopt.jaksim.global.exception.NotFoundException;
 import org.sopt.jaksim.global.message.ErrorMessage;
 import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.domain.TaskTimer;
-import org.sopt.jaksim.task.domain.TodoTask;
 import org.sopt.jaksim.task.dto.StopTimerRequest;
 import org.sopt.jaksim.task.repository.TaskTimerRepository;
+import org.sopt.jaksim.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,17 +21,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TaskTimerService {
     private final TaskTimerRepository taskTimerRepository;
+    private final UserFacade userFacade;
 
     public void calculateTaskTimerOnStop(Long taskId, StopTimerRequest stopTimerRequest) {
-        TaskTimer taskTimer = taskTimerRepository.findById(taskId).orElseThrow(
+//        userFacade.getUserByPrincipal().getId()
+        TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(1L, stopTimerRequest.targetDate(), taskId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.NOT_FOUND)
         );
         taskTimer.setTargetTime(taskTimer.getTargetTime() + stopTimerRequest.elapsedTime());
         taskTimerRepository.save(taskTimer);
     }
 
-    public Map<Long, TaskTimer> getTaskTimerMapByTaskList(List<Task> taskList) {
+    public Map<Long, TaskTimer> getTaskTimerMapByTaskList(Long userId, LocalDate targetDate, List<Task> taskList) {
         List<Long> taskIdList = taskList.stream().map(Task::getId).collect(Collectors.toList());
-        return taskTimerRepository.findByTaskIdIn(taskIdList).stream().collect(Collectors.toMap(TaskTimer::getTaskId, task -> task));
+        return taskTimerRepository.findByUserIdAndTargetDateAndTaskIdIn(userId, targetDate, taskIdList).stream().collect(Collectors.toMap(TaskTimer::getTaskId, task -> task));
     }
 }
