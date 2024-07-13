@@ -25,10 +25,11 @@ import static org.sopt.jaksim.global.exception.IOException.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class TaskApiController {
+public class TaskApiController implements TaskApi{
     private final TaskService taskService;
 
     @GetMapping("/fetch-title")
+    @Override
     public ResponseEntity<BaseResponse<?>> fetchTitle(@RequestParam("requestUrl") String requestUrl) {
         try {
             Document doc = Jsoup.connect(requestUrl).get();
@@ -40,6 +41,7 @@ public class TaskApiController {
     }
 
     @PostMapping("/categories/{categoryId}")
+    @Override
     public ResponseEntity<BaseResponse<?>> create(@PathVariable("categoryId") Long categoryId,
                                                   @RequestBody TaskCreateRequest taskCreateRequest) {
         taskService.create(categoryId, taskCreateRequest);
@@ -47,6 +49,7 @@ public class TaskApiController {
     }
 
     @PatchMapping("/tasks/{taskId}/status")
+    @Override
     public ResponseEntity<BaseResponse<?>> toggleTaskStatus(@PathVariable("taskId") Long taskId) {
         taskService.toggleTaskCompletionStatus(taskId);
         return ApiResponseUtil.success(SuccessMessage.SUCCESS);
