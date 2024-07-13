@@ -23,7 +23,7 @@ import java.time.LocalDate;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class TimerApiController {
+public class TimerApiController implements TimerApi{
 
     private final TaskTimerService taskTimerService;
     private final UserTimerService userTimerService;
