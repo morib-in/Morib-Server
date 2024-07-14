@@ -5,12 +5,14 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.jaksim.auth.UserAuthentication;
 import org.sopt.jaksim.auth.jwt.JwtTokenProvider;
 import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class HealthCheckController {
     private final Environment env;
     private static final String NULL = "";
