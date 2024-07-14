@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
 public class HealthCheckController {
     private final Environment env;
     private static final String NULL = "";
