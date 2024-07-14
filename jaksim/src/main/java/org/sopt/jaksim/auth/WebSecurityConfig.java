@@ -23,23 +23,23 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .maxAge(3000);
     }
 
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
-
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod(HttpMethod.GET);
-        config.addAllowedMethod(HttpMethod.POST);
-        config.addAllowedMethod(HttpMethod.PATCH);
-        config.addAllowedMethod(HttpMethod.PUT);
-        config.addAllowedMethod(HttpMethod.OPTIONS);
-        config.setMaxAge(6000L);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter(source));
-        filterBean.setOrder(0);
-        return filterBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
+//
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOrigin("*");
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod(HttpMethod.GET);
+//        config.addAllowedMethod(HttpMethod.POST);
+//        config.addAllowedMethod(HttpMethod.PATCH);
+//        config.addAllowedMethod(HttpMethod.PUT);
+//        config.addAllowedMethod(HttpMethod.OPTIONS);
+//        config.setMaxAge(6000L);
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter(source));
+//        filterBean.setOrder(0);
+//        return filterBean;
+//    }
 }
