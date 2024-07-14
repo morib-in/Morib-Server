@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.sopt.jaksim.auth.UserAuthentication;
 import org.sopt.jaksim.auth.jwt.JwtTokenProvider;
 import org.sopt.jaksim.global.exception.UnauthorizedException;
@@ -24,6 +25,7 @@ import static org.sopt.jaksim.global.common.Constants.BEARER;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -41,7 +43,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception exception) {
-            throw new UnauthorizedException(ErrorMessage.JWT_UNAUTHORIZED_EXCEPTION);
+            log.info("token authentication : {}:", exception.getMessage());
+//            throw new UnauthorizedException(ErrorMessage.JWT_UNAUTHORIZED_EXCEPTION);
         }
         filterChain.doFilter(request, response);
     }
