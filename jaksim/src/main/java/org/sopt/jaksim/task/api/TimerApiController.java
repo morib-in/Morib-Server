@@ -23,19 +23,21 @@ import java.time.LocalDate;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class TimerApiController {
+public class TimerApiController implements TimerApi {
 
     private final TaskTimerService taskTimerService;
     private final UserTimerService userTimerService;
     private final TodoService todoService;
 
     @GetMapping("/timer")
+    @Override
     public ResponseEntity<BaseResponse<?>> getTotalTimeToday(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate targetDate) {
         TotalTimeTodayResponse response = userTimerService.getTotalTimeToday(targetDate);
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, response);
     }
 
     @PostMapping("/timer/stop/{taskId}")
+    @Override
     public ResponseEntity<BaseResponse<?>> stopTimerAndFetchAccumulatedTime(@PathVariable Long taskId, @RequestBody StopTimerRequest stopTimerRequest) {
         taskTimerService.calculateTaskTimerOnStop(taskId, stopTimerRequest);
         userTimerService.calculateUserTimerOnStop(stopTimerRequest);
@@ -43,6 +45,7 @@ public class TimerApiController {
     }
 
     @PostMapping("/timer/start")
+    @Override
     public ResponseEntity<BaseResponse<?>> startTimer(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate targetDate,
                                                       @RequestBody StartTimerRequest startTimerRequest) {
         todoService.startTimer(targetDate, startTimerRequest);
@@ -50,6 +53,7 @@ public class TimerApiController {
     }
 
     @GetMapping("/timer/todo-card")
+    @Override
     public ResponseEntity<BaseResponse<?>> getTodoCards(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate targetDate) {
         TodoCardResponse response = todoService.getTodoCard(targetDate);
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, response);
