@@ -18,6 +18,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     }
 
     private void setResponse(HttpServletResponse response) {
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+//        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
     }
 }
