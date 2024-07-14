@@ -38,16 +38,16 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors((cors) -> cors
-                .configurationSource(request -> {
-                    CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
-                    configuration.setAllowedMethods(Collections.singletonList("*"));
-                    configuration.setAllowCredentials(true);
-                    configuration.setAllowedHeaders(Collections.singletonList("*"));
-                    configuration.setMaxAge(3600L);
-                    return configuration;
-                }));
+//        http.cors((cors) -> cors
+//                .configurationSource(request -> {
+//                    CorsConfiguration configuration = new CorsConfiguration();
+//                    configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
+//                    configuration.setAllowedMethods(Collections.singletonList("*"));
+//                    configuration.setAllowCredentials(true);
+//                    configuration.setAllowedHeaders(Collections.singletonList("*"));
+//                    configuration.setMaxAge(3600L);
+//                    return configuration;
+//                }));
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
