@@ -20,6 +20,7 @@ public class SocialLoginTempController {
     // Goolge이 Redirect로 보내는 URL, Authorization code 반환
     // 클라에서 해줄 작업
     @GetMapping("/oauth2/code/google")
+
     public void redirectByGoogle(@RequestParam("code") String code) throws GeneralSecurityException, IOException {
         log.info("authorization code : " + code);
     }
