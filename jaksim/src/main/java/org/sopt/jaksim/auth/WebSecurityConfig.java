@@ -19,7 +19,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("*")
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS") //* *허용할* *HTTP* *메소드 목록*
-                .allowCredentials(true)
                 .maxAge(3000);
     }
 
