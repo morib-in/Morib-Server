@@ -29,25 +29,26 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     private static final String[] AUTH_WHITE_LIST = {
-            ACTIVATE_PROFILE_URL,
-             "/api/v1/users/signin/**", "/api/v1/auth/**",
-            "/api/v1/users/reissue/**", "/socket.io/**",
-            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",
-            "/api/v1/**", "/api/v1/timer/**"};
+//            ACTIVATE_PROFILE_URL,
+//             "/api/v1/users/signin/**", "/api/v1/auth/**",
+//            "/api/v1/users/reissue/**", "/socket.io/**",
+//            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**"
+    "/**"
+    };
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors((cors) -> cors
-                .configurationSource(request -> {
-                    CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-                    configuration.setAllowedMethods(Collections.singletonList("*"));
-                    configuration.setAllowCredentials(true);
-                    configuration.setAllowedHeaders(Collections.singletonList("*"));
-                    configuration.setMaxAge(3600L);
-                    configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-                    return configuration;
-                }));
+//        http.cors((cors) -> cors
+//                .configurationSource(request -> {
+//                    CorsConfiguration configuration = new CorsConfiguration();
+//                    configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+//                    configuration.setAllowedMethods(Collections.singletonList("*"));
+//                    configuration.setAllowCredentials(true);
+//                    configuration.setAllowedHeaders(Collections.singletonList("*"));
+//                    configuration.setMaxAge(3600L);
+//                    configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+//                    return configuration;
+//                }));
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -66,6 +67,5 @@ public class SecurityConfig {
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
 
 }
