@@ -16,9 +16,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") //* *모든 경로에 대해*
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS") //* *허용할* *HTTP* *메소드 목록*
+                .allowCredentials(true)
                 .maxAge(3000);
     }
 
