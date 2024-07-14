@@ -12,33 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebSecurityConfig implements WebMvcConfigurer {
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") //* *모든 경로에 대해*
-                .allowedOriginPatterns("*")
-                .allowedHeaders("*")
-                .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS") //* *허용할* *HTTP* *메소드 목록*
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS")
                 .maxAge(3000);
     }
-
-//    @Bean
-//    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
-//
-//        CorsConfiguration config = new CorsConfiguration();
-//        config.setAllowCredentials(true);
-//        config.addAllowedOrigin("*");
-//        config.addAllowedHeader("*");
-//        config.addAllowedMethod(HttpMethod.GET);
-//        config.addAllowedMethod(HttpMethod.POST);
-//        config.addAllowedMethod(HttpMethod.PATCH);
-//        config.addAllowedMethod(HttpMethod.PUT);
-//        config.addAllowedMethod(HttpMethod.OPTIONS);
-//        config.setMaxAge(6000L);
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", config);
-//        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter(source));
-//        filterBean.setOrder(0);
-//        return filterBean;
-//    }
 }
