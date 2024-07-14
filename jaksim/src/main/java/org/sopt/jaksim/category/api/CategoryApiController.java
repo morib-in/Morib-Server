@@ -22,17 +22,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class CategoryApiController {
+public class CategoryApiController implements CategoryApi {
     private final CategoryService categoryService;
     private final CategoryTaskFacade categoryTaskFacade;
 
     @PostMapping("/categories")
+    @Override
     public ResponseEntity<BaseResponse<?>> create(@RequestBody CategoryCreateRequest request) {
         categoryService.create(request);
         return ApiResponseUtil.success(SuccessMessage.SUCCESS);
     }
 
     @GetMapping("/resources")
+    @Override
     public ResponseEntity<BaseResponse<?>> retrieve(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                     @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         List<FilteredResourceResponse> response = categoryTaskFacade.getAllResources(startDate, endDate);
@@ -40,6 +42,7 @@ public class CategoryApiController {
     }
 
     @GetMapping("/categories")
+    @Override
     public ResponseEntity<BaseResponse<?>> getCategoriesByUserId() {
         List<CategoryCheckResponse> categories = categoryService.getCategoriesByUserId(); // categoryRepository를 통해 데이터베이스에서 특정 사용자의 카테고리를 조회
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, categories); // 성공 응답 반환
