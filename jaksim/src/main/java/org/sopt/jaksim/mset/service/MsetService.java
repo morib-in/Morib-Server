@@ -24,7 +24,7 @@ public class MsetService {
     public void createByCategory(CategoryCreateRequest categoryCreateRequest, Long categoryId) {
         List<Mset> msetList = categoryCreateRequest.msets();
         for (Mset mset : msetList) {
-            msetRepository.save(Mset.create(mset.getName(), mset.getUrl()));
+            mset = msetRepository.save(Mset.create(mset.getName(), mset.getUrl()));
             categoryMsetRepository.save(CategoryMset.create(categoryId, mset.getId()));
         }
     }

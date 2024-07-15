@@ -50,7 +50,8 @@ public class TodoTaskService {
         for (TodoTask newTask : current) {
             if (!oldTaskMap.containsKey(newTask.getTaskId())) {
                 oldTaskMap.put(newTask.getTaskId(), newTask);
-                taskTimerRepository.save(TaskTimer.create(userFacade.getUserByPrincipal().getId(), newTask.getTaskId()));
+                //userFacade.getUserByPrincipal().getId()
+                taskTimerRepository.save(TaskTimer.create(3L, newTask.getTaskId()));
             }
         }
 

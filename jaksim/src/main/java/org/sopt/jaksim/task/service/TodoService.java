@@ -35,7 +35,7 @@ public class TodoService {
 
     public void startTimer(LocalDate targetDate, StartTimerRequest startTimerRequest) {
 //        Long userId = userFacade.getUserByPrincipal().getId();
-        Long userId = 1L;
+        Long userId = 3L;
         Todo todo = Todo.init(userId);
         // 해당 날짜에 생성한 Todo가 없다면
         if (!isExist(targetDate)) {
@@ -56,7 +56,7 @@ public class TodoService {
 
     public TodoCardResponse getTodoCard(LocalDate targetDate) {
         //        Long userId = userFacade.getUserByPrincipal().getId();
-        Long userId = 1L;
+        Long userId = 3L;
         // 유저의 오늘 할일을 찾기 ok
         Todo todo = todoRepository.findByUserIdAndTargetDate(userId, targetDate);
         // 할일에 등록된 todoTask를 가져오기 ok

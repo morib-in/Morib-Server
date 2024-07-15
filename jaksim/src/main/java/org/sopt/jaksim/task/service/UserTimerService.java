@@ -28,9 +28,9 @@ public class UserTimerService {
             throw new InvalidValueException(ErrorMessage.IS_NOT_TODAY);
         }
 //        User user = userFacade.getUserByPrincipal();
-        UserTimer userTimer = getUserTimerByUserIdAndTargetDate(1L, targetDate);
+        UserTimer userTimer = getUserTimerByUserIdAndTargetDate(3L, targetDate);
         if (userTimer == null) {
-            userTimer = userTimerRepository.save(UserTimer.create(1L, targetDate));
+            userTimer = userTimerRepository.save(UserTimer.create(3L, targetDate));
         }
         return TotalTimeTodayResponse.of(targetDate, userTimer.getTargetTime());
     }
@@ -49,7 +49,7 @@ public class UserTimerService {
     public void calculateUserTimerOnStop(StopTimerRequest stopTimerRequest) {
 //        User user = userFacade.getUserByPrincipal();
 //        user.getId()
-        UserTimer userTimer = userTimerRepository.findByUserIdAndTargetDate(1L, stopTimerRequest.targetDate());
+        UserTimer userTimer = userTimerRepository.findByUserIdAndTargetDate(3L, stopTimerRequest.targetDate());
         userTimer.setTargetTime(userTimer.getTargetTime() + stopTimerRequest.elapsedTime());
         userTimerRepository.save(userTimer);
     }
