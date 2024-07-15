@@ -27,7 +27,7 @@ public class CategoryTaskFacade {
     public List<FilteredResourceResponse> getAllResources(LocalDate startDate, LocalDate endDate) {
 //        User user = userFacade.getUserByPrincipal();
         // 구간에 맞는 Category 조회
-        List<Category> categoryList = categoryService.getCategoriesInRange(1L, startDate, endDate);
+        List<Category> categoryList = categoryService.getCategoriesInRange(3L, startDate, endDate);
         // 카테고리들로 CategoryTask 조회 + 카테고리에 task 엮기
         List<CategoryTaskLink> categoryTaskLinkList = categoryService.getCategoryTaskByCategories(categoryList);
         // 날짜별로 데이터 만들기

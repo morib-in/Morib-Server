@@ -41,7 +41,8 @@ public class CategoryService {
     public void create(CategoryCreateRequest categoryCreateRequest) {
         Category category = Category.create(
                 categoryCreateRequest.name(),
-                userFacade.getUserByPrincipal().getId(),
+//                userFacade.getUserByPrincipal().getId(),
+                3L,
                 DateUtil.stringToDate(categoryCreateRequest.startDate()),
                 DateUtil.stringToDate(categoryCreateRequest.endDate()));
         category = categoryRepository.save(category);
@@ -86,7 +87,8 @@ public class CategoryService {
     public List<CategoryCheckResponse> getCategoriesByUserId() {
         // userId -> user pk -> Long -> SecurityContextHolder Authentication 객체
         // principal handler
-        Long userId = userFacade.getUserByPrincipal().getId();
+        //Long userId = userFacade.getUserByPrincipal().getId();
+        Long userId = 3L;
         List<Category> categories = categoryRepository.findByUserId(userId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.NOT_FOUND)
         );

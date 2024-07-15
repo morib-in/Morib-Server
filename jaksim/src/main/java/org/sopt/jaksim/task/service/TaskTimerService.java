@@ -25,7 +25,7 @@ public class TaskTimerService {
 
     public void calculateTaskTimerOnStop(Long taskId, StopTimerRequest stopTimerRequest) {
 //        userFacade.getUserByPrincipal().getId()
-        TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(1L, stopTimerRequest.targetDate(), taskId).orElseThrow(
+        TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(3L, stopTimerRequest.targetDate(), taskId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.NOT_FOUND)
         );
         taskTimer.setTargetTime(taskTimer.getTargetTime() + stopTimerRequest.elapsedTime());

@@ -42,7 +42,7 @@ public class TaskService {
                 taskCreateRequest.startDate(),
                 taskCreateRequest.endDate());
 
-        taskRepository.save(task);
+        task = taskRepository.save(task);
 
         CategoryTask categoryTask = CategoryTask.create(
                 categoryId,
