@@ -222,7 +222,7 @@ public class UserService {
     }
     private void updateRefreshToken(String refreshToken, User user) {
         user.setRefreshToken(refreshToken);
-        redisTokenRepository.save(RefreshToken.of(user.getId(), refreshToken));
+//        redisTokenRepository.save(RefreshToken.of(user.getId(), refreshToken));
     }
 }
 
