@@ -16,7 +16,7 @@ import java.security.GeneralSecurityException;
 @RequestMapping("/login")
 public class SocialLoginTempController {
 
-    // https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:8080/login/oauth2/code/google&client_id=659770443420-vbmil1na1ls85peb64g8krccn7ulmvu2.apps.googleusercontent.com
+    // https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https://api.morib.in/login/oauth2/code/google&client_id=659770443420-vbmil1na1ls85peb64g8krccn7ulmvu2.apps.googleusercontent.com
     // Goolge이 Redirect로 보내는 URL, Authorization code 반환
     // 클라에서 해줄 작업
     @GetMapping("/oauth2/code/google")

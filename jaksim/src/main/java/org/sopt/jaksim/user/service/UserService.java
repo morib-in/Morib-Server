@@ -209,7 +209,6 @@ public class UserService {
     }
 
     private void validateRefreshToken(String refreshToken, Long userId) {
-        // jwt 클래스 따로 만들어서 할 예정
         jwtTokenProvider.validateToken(refreshToken);
         String storedRefreshToken = getRefreshTokenFromRedis(userId).getRefreshToken();
         jwtTokenProvider.equalsRefreshToken(refreshToken,storedRefreshToken);

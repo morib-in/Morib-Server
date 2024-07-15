@@ -32,7 +32,7 @@ public class SecurityConfig {
     private static final String[] AUTH_WHITE_LIST = {
             ACTIVATE_PROFILE_URL,
              "/api/v1/users/signin/**", "/api/v1/auth/**",
-            "/api/v1/users/reissue/**",
+            "/api/v1/users/reissue/**", "/login/**",
             "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**"
     };
 
@@ -49,7 +49,6 @@ public class SecurityConfig {
                 });
 
         http.authorizeHttpRequests((auth) -> auth
-//            .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
             .requestMatchers(AUTH_WHITE_LIST).permitAll()
             .anyRequest().authenticated()
         )
