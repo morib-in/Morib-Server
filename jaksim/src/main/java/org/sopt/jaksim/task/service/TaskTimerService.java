@@ -36,4 +36,11 @@ public class TaskTimerService {
         List<Long> taskIdList = taskList.stream().map(Task::getId).collect(Collectors.toList());
         return taskTimerRepository.findByUserIdAndTargetDateAndTaskIdIn(userId, targetDate, taskIdList).stream().collect(Collectors.toMap(TaskTimer::getTaskId, task -> task));
     }
+
+    public int getTaskTimeByTaskId(Long userId, LocalDate targetDate, Long taskId) {
+        TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(userId, targetDate, taskId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        );
+        return taskTimer.getTargetTime();
+    }
 }
