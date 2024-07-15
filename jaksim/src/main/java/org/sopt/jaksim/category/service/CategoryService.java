@@ -7,6 +7,7 @@ import org.sopt.jaksim.category.dto.CategoryCheckResponse;
 import org.sopt.jaksim.category.domain.CategoryTask;
 import org.sopt.jaksim.category.dto.CategoryCreateRequest;
 import org.sopt.jaksim.category.dto.CategoryTaskLink;
+import org.sopt.jaksim.category.dto.TaskWithTaskTimer;
 import org.sopt.jaksim.category.repository.CategoryRepository;
 import org.sopt.jaksim.category.repository.CategoryTaskRepository;
 import org.sopt.jaksim.global.common.DateUtil;
@@ -16,6 +17,7 @@ import org.sopt.jaksim.mset.service.MsetService;
 
 import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.repository.TaskRepository;
+import org.sopt.jaksim.task.repository.TaskTimerRepository;
 import org.sopt.jaksim.task.service.TaskService;
 import org.sopt.jaksim.user.domain.User;
 import org.sopt.jaksim.user.facade.UserFacade;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
+    private final TaskTimerRepository taskTimerRepository;
     private final CategoryRepository categoryRepository;
     private final CategoryTaskRepository categoryTaskRepository;
     private final TaskRepository taskRepository;
@@ -50,8 +53,11 @@ public class CategoryService {
     }
 
     // 유저의 카테고리를 구간에 맞게 가져옴
-    public List<Category> getCategoriesInRange(Long userId, LocalDate startDate, LocalDate endDate) {
-        return categoryRepository.findByUserIdWithRange(userId, startDate, endDate);
+    public List<CategoryCheckResponse> getCategoriesInRange(Long userId, LocalDate startDate, LocalDate endDate) {
+        List<Category> categoryList = categoryRepository.findByUserIdWithRange(userId, startDate, endDate);
+        return categoryList.stream()
+                .map(category -> CategoryCheckResponse.of(category.getId(), category.getName(), category.getStartDate(), category.getEndDate()))
+                .collect(Collectors.toList());
     }
 
     public Category getCategoryById(Long categoryId) {
@@ -60,27 +66,28 @@ public class CategoryService {
         );
     }
 
-    public List<CategoryTaskLink> getCategoryTaskByCategories(List<Category> categoryList) {
+    public List<CategoryTaskLink> getCategoryTaskByCategories(List<CategoryCheckResponse> categoryCheckResponseList) {
         List<CategoryTaskLink> categoryTaskLinkList = new ArrayList<>();
-        for (Category category : categoryList) {
+        for (CategoryCheckResponse category : categoryCheckResponseList) {
             // category에 대한 categoryTask 조회
-            List<CategoryTask> categoryTaskList = categoryTaskRepository.findByCategoryId(category.getId());
-            List<Task> taskList = new ArrayList<>();
+            List<CategoryTask> categoryTaskList = categoryTaskRepository.findByCategoryId(category.id());
+            List<TaskWithTaskTimer> taskWithTaskTimerList = new ArrayList<>();
             // 해당 category에 연결된 categoryTask들의 task들을 조회해서 categoryTaskLinkList에 주입
             for (CategoryTask categoryTask : categoryTaskList) {
                 // 해당 categoryTask의 taskId로 task를 조회해서 taskList에 주입
-                taskList.add(taskService.getTaskById(categoryTask.getTaskId()));
+                Task task = taskService.getTaskById(categoryTask.getTaskId());
+                taskWithTaskTimerList.add(TaskWithTaskTimer.init(task.getId(), task.getName(), task.getStartDate(), task.getEndDate()));
             }
-            categoryTaskLinkList.add(CategoryTaskLink.of(category,taskList));
+            categoryTaskLinkList.add(CategoryTaskLink.of(category, taskWithTaskTimerList));
         }
         return categoryTaskLinkList;
     }
 
-    public boolean isContains(Category category, LocalDate idxDate) {
-        return (category.getStartDate().isBefore(idxDate) &&
-                category.getEndDate().isAfter(idxDate)) ||
-                category.getStartDate().equals(idxDate) ||
-                category.getEndDate().equals(idxDate);
+    public boolean isContains(CategoryCheckResponse categoryCheckResponse, LocalDate idxDate) {
+        return (categoryCheckResponse.startDate().isBefore(idxDate) &&
+                categoryCheckResponse.endDate().isAfter(idxDate)) ||
+                categoryCheckResponse.startDate().equals(idxDate) ||
+                categoryCheckResponse.endDate().equals(idxDate);
     }
 
 
