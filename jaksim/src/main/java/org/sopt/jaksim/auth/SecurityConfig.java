@@ -27,8 +27,7 @@ public class SecurityConfig {
             ACTIVATE_PROFILE_URL,
              "/api/v1/users/signin/**", "/api/v1/auth/**",
             "/api/v1/users/reissue/**", "/login/**",
-            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",
-            "/**"
+            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**"
     };
 
     @Bean
