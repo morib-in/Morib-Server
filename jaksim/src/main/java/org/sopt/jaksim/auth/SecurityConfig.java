@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configurers.RequestCac
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.sopt.jaksim.global.common.Constants.ACTIVATE_PROFILE_URL;
+
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity //web Security를 사용할 수 있게
@@ -22,10 +24,10 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     private static final String[] AUTH_WHITE_LIST = {
-//            ACTIVATE_PROFILE_URL,
-//             "/api/v1/users/signin/**", "/api/v1/auth/**",
-//            "/api/v1/users/reissue/**", "/login/**",
-//            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**"
+            ACTIVATE_PROFILE_URL,
+             "/api/v1/users/signin/**", "/api/v1/auth/**",
+            "/api/v1/users/reissue/**", "/login/**",
+            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",
             "/**"
     };
 
