@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.sopt.jaksim.category.dto.CategoryMsetLinkResponse;
 import org.sopt.jaksim.global.common.BaseResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface MsetApi {
     @Operation(
             summary = "다른 카테고리에서 모립세트 불러오기 API",
+            description = "특정 카테고리의 모립세트를 불러오는 API입니다.",
             responses = {
                     @ApiResponse(
-                            responseCode = "201",
+                            responseCode = "200",
                             description = "요청이 성공했습니다.",
-                            content = @Content(schema = @Schema(implementation = BaseResponse.class))),
+                            content = @Content(schema = @Schema(implementation = CategoryMsetLinkResponse.class))),
                     @ApiResponse(
                             responseCode = "400",
                             description = "잘못된 요청입니다.",
@@ -43,6 +45,6 @@ public interface MsetApi {
                     @ApiResponse(
                             responseCode = "500",
                             description = "서버 내부 오류입니다.")})
-    public ResponseEntity<BaseResponse<?>> getFromOtherCategory(@PathVariable("categoryId") Long categoryId);
+    ResponseEntity<BaseResponse<?>> getFromOtherCategory(@PathVariable("categoryId") Long categoryId);
 
 }

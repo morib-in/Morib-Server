@@ -58,7 +58,7 @@ public interface UserApi {
                             description = "서버 내부 오류입니다.",
                             content = @Content)})
     @PostMapping("/user/signin")
-    public ResponseEntity<BaseResponse<?>> signin(@RequestHeader(AUTHORIZATION) final String accessToken);
+    ResponseEntity<BaseResponse<?>> signin(@RequestHeader(AUTHORIZATION) final String accessToken);
 
 
 }
