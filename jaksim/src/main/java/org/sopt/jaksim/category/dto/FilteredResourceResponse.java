@@ -1,5 +1,6 @@
 package org.sopt.jaksim.category.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Builder
 public record FilteredResourceResponse(
     LocalDate date,
+    @JsonProperty("categories")
     List<CategoryTaskLink> categoryTaskLinkList)
 {
     public static FilteredResourceResponse of(LocalDate date, List<CategoryTaskLink> categoryTaskLinkList) {

@@ -3,6 +3,7 @@ package org.sopt.jaksim.task.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sopt.jaksim.category.domain.CategoryTask;
+import org.sopt.jaksim.category.dto.TaskWithTaskTimer;
 import org.sopt.jaksim.category.repository.CategoryTaskRepository;
 import org.sopt.jaksim.global.exception.NotFoundException;
 import org.sopt.jaksim.global.message.ErrorMessage;
@@ -30,10 +31,10 @@ public class TaskService {
         );
     }
 
-    public boolean isContains(Task task, LocalDate idxDate) {
-        return task.getStartDate().equals(idxDate) || // startDate = idxDate
-                task.getEndDate().equals(idxDate) || // endDate = idxDate
-                (task.getStartDate().isBefore(idxDate) && task.getEndDate().isAfter(idxDate)); // startDate, endDate가 idxDate를 포함
+    public boolean isContains(TaskWithTaskTimer taskWithTaskTimer, LocalDate idxDate) {
+        return taskWithTaskTimer.startDate().equals(idxDate) || // startDate = idxDate
+                taskWithTaskTimer.endDate().equals(idxDate) || // endDate = idxDate
+                (taskWithTaskTimer.startDate().isBefore(idxDate) && taskWithTaskTimer.endDate().isAfter(idxDate)); // startDate, endDate가 idxDate를 포함
     }
 
     public void create(Long categoryId, TaskCreateRequest taskCreateRequest) {

@@ -24,9 +24,9 @@ public class UserTimerService {
     private final UserFacade userFacade;
 
     public TotalTimeTodayResponse getTotalTimeToday(LocalDate targetDate) {
-        if (!isToday(targetDate)) {
-            throw new InvalidValueException(ErrorMessage.IS_NOT_TODAY);
-        }
+//        if (!isToday(targetDate)) {
+//            throw new InvalidValueException(ErrorMessage.IS_NOT_TODAY);
+//        }
 //        User user = userFacade.getUserByPrincipal();
         UserTimer userTimer = getUserTimerByUserIdAndTargetDate(3L, targetDate);
         if (userTimer == null) {
