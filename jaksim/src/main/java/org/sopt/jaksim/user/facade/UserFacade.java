@@ -25,8 +25,8 @@ public class UserFacade {
         return userService.signIn();
     }
 
-    public UserSignInResponse reissue(String refreshToken, UserReissueRequest userReissueRequest) {
-        return userService.reissue(refreshToken, userReissueRequest);
+    public UserSignInResponse reissue(String refreshToken) {
+        return userService.reissue(refreshToken);
     }
 
     public User getUserByPrincipal() {

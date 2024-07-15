@@ -25,6 +25,7 @@ import org.sopt.jaksim.user.dto.request.UserSignInRequest;
 import org.sopt.jaksim.user.dto.request.UserSignUpRequest;
 import org.sopt.jaksim.user.dto.response.UserSignInResponse;
 import org.sopt.jaksim.user.dto.response.UserSignUpResponse;
+import org.sopt.jaksim.user.facade.UserFacade;
 import org.sopt.jaksim.user.repository.RedisTokenRepository;
 import org.sopt.jaksim.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -177,8 +178,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public UserSignInResponse reissue(String token, UserReissueRequest userReissueRequest) {
-       Long userId = userReissueRequest.userId();
+    public UserSignInResponse reissue(String token) {
+       Long userId = principalHandler.getUserIdFromPrincipal();
        validateRefreshToken(token, userId);
        User user = getUser(userId);
        String accessToken = issueAccessTokenByUserId(userId);

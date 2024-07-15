@@ -13,7 +13,6 @@ public enum ErrorMessage {
      */
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "e4000", "잘못된 요청입니다."),
     INVALID_PLATFORM_TYPE(HttpStatus.BAD_REQUEST, "e4001", "유효하지 않은 플랫폼 타입입니다."),
-    INVALID_GRANT_BY_OAUTH(HttpStatus.BAD_REQUEST, "e4002", "유효하지 않은 인가 코드입니다. 이미 회원가입된 사용자입니다."),
     INVALID_DATE_FORMAT(HttpStatus.BAD_REQUEST, "e4003", "유효하지 않은 날짜 형식입니다. yyyyMMdd 형식으로 작성해주세요."),
     IS_NOT_TODAY(HttpStatus.BAD_REQUEST, "e4004", "targetDate가 오늘 날짜가 아닙니다."),
     INVALID_URL(HttpStatus.BAD_REQUEST, "e4005", "요청된 url이 유효하지 않습니다."),
@@ -25,6 +24,7 @@ public enum ErrorMessage {
     INVALID_ID_TOKEN(HttpStatus.UNAUTHORIZED, "e4013", "해당 유저의 ID 토큰이 유효하지 않습니다."),
     INVALID_ID_TOKEN_IS_NULL(HttpStatus.UNAUTHORIZED, "e4014", "해당 유저의 ID 토큰이 null 입니다."),
     MISMATCH_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, "e4015", "리프레시 토큰이 일치하지 않습니다."),
+    INVALID_GRANT_BY_OAUTH(HttpStatus.UNAUTHORIZED, "e4016", "유효하지 않은 인가 코드입니다. 이미 회원가입된 사용자입니다."),
 
     /**
      * 403 Forbidden

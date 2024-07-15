@@ -42,10 +42,9 @@ public class UserApiController implements UserApi{
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, response);
     }
 
-    @PostMapping("/users/reissue")
-    public ResponseEntity<BaseResponse<?>> reissue(@RequestHeader(AUTHORIZATION) final String refreshToken,
-                                                      @RequestBody final UserReissueRequest userReissueRequest) {
-        UserSignInResponse response = userFacade.reissue(refreshToken, userReissueRequest);
+    @PatchMapping("/users/reissue")
+    public ResponseEntity<BaseResponse<?>> reissue(@RequestHeader(AUTHORIZATION) final String refreshToken) {
+        UserSignInResponse response = userFacade.reissue(refreshToken);
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, response);
     }
 }
