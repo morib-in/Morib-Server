@@ -10,15 +10,16 @@ public record TaskWithTaskTimer(
         String name,
         LocalDate startDate,
         LocalDate endDate,
-        int targetTime
+        int targetTime,
+        boolean isComplete
 ) {
-    public static TaskWithTaskTimer of(Long id, String name, LocalDate startDate, LocalDate endDate, int targetTime) {
-        return new TaskWithTaskTimer(id, name, startDate, endDate, targetTime);
+    public static TaskWithTaskTimer of(Long id, String name, LocalDate startDate, LocalDate endDate, int targetTime, boolean isComplete) {
+        return new TaskWithTaskTimer(id, name, startDate, endDate, targetTime, isComplete);
     }
-    public static TaskWithTaskTimer init(Long id, String name, LocalDate startDate, LocalDate endDate) {
-        return new TaskWithTaskTimer(id, name, startDate, endDate, 0);
+    public static TaskWithTaskTimer init(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isComplete) {
+        return new TaskWithTaskTimer(id, name, startDate, endDate, 0, isComplete);
     }
-    public static TaskWithTaskTimer ofByInit(TaskWithTaskTimer taskWithTaskTimer, int targetTime) {
-        return new TaskWithTaskTimer(taskWithTaskTimer.id(), taskWithTaskTimer.name(), taskWithTaskTimer.startDate, taskWithTaskTimer.endDate, targetTime);
+    public static TaskWithTaskTimer ofByInit(TaskWithTaskTimer taskWithTaskTimer, int targetTime, boolean isComplete) {
+        return new TaskWithTaskTimer(taskWithTaskTimer.id(), taskWithTaskTimer.name(), taskWithTaskTimer.startDate, taskWithTaskTimer.endDate, targetTime, isComplete);
     }
 }
