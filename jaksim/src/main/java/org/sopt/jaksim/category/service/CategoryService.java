@@ -76,7 +76,7 @@ public class CategoryService {
             for (CategoryTask categoryTask : categoryTaskList) {
                 // 해당 categoryTask의 taskId로 task를 조회해서 taskList에 주입
                 Task task = taskService.getTaskById(categoryTask.getTaskId());
-                taskWithTaskTimerList.add(TaskWithTaskTimer.init(task.getId(), task.getName(), task.getStartDate(), task.getEndDate()));
+                taskWithTaskTimerList.add(TaskWithTaskTimer.init(task.getId(), task.getName(), task.getStartDate(), task.getEndDate(), task.getIsComplete()));
             }
             categoryTaskLinkList.add(CategoryTaskLink.of(category, taskWithTaskTimerList));
         }
@@ -84,6 +84,9 @@ public class CategoryService {
     }
 
     public boolean isContains(CategoryCheckResponse categoryCheckResponse, LocalDate idxDate) {
+        if (categoryCheckResponse.endDate() == null) {
+
+        }
         return (categoryCheckResponse.startDate().isBefore(idxDate) &&
                 categoryCheckResponse.endDate().isAfter(idxDate)) ||
                 categoryCheckResponse.startDate().equals(idxDate) ||

@@ -53,7 +53,7 @@ public class CategoryTaskFacade {
                         // taskList 중, idxDate에 해당하면 Task List에 추가
                         if (taskService.isContains(task, idxDate)) {
                             // targetTime을 가져와서 세팅
-                            taskWithTaskTimerList.add(TaskWithTaskTimer.ofByInit(task, taskTimerService.getTaskTimeByTaskId(3L, idxDate, task.id())));
+                            taskWithTaskTimerList.add(TaskWithTaskTimer.ofByInit(task, taskTimerService.getTaskTimeByTaskId(3L, idxDate, task.id()), task.isComplete()));
                         }
                     }
                     target.categoryTaskLinkList().add(CategoryTaskLink.of(categoryTaskLink.categoryCheckResponse(), taskWithTaskTimerList));
