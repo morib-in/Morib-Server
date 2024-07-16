@@ -34,6 +34,7 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 │   ├── PrincipalHandler.java
 │   ├── SecurityConfig.java
 │   ├── UserAuthentication.java
+│   ├── WebSecurityConfig.java
 │   ├── filter
 │   │   ├── CustomAccessDeniedHandler.java
 │   │   ├── CustomJwtAuthenticationEntryPoint.java
@@ -43,19 +44,27 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 │       └── JwtValidationType.java
 ├── category
 │   ├── api
+│   │   ├── CategoryApi.java
 │   │   └── CategoryApiController.java
 │   ├── domain
 │   │   ├── Category.java
 │   │   └── CategoryTask.java
 │   ├── dto
+│   │   ├── CategoryCheckResponse.java
 │   │   ├── CategoryCreateRequest.java
-│   │   └── CategoryFilterByDateWithTask.java
+│   │   ├── CategoryMsetLinkResponse.java
+│   │   ├── CategoryTaskLink.java
+│   │   ├── FilteredResourceResponse.java
+│   │   └── TaskWithTaskTimer.java
+│   ├── facade
+│   │   ├── CategoryMsetFacade.java
+│   │   └── CategoryTaskFacade.java
 │   ├── repository
 │   │   ├── CategoryRepository.java
 │   │   └── CategoryTaskRepository.java
 │   └── service
 │       ├── CategoryService.java
-│       └── CategoryTaskFacade.java
+│       └── CategoryTaskService.java
 ├── global
 │   ├── common
 │   │   ├── ApiResponseUtil.java
@@ -86,6 +95,8 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 │       └── SuccessMessage.java
 ├── mset
 │   ├── api
+│   │   ├── MsetApi.java
+│   │   └── MsetApiController.java
 │   ├── domain
 │   │   ├── CategoryMset.java
 │   │   ├── Mset.java
@@ -94,6 +105,7 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 │   │   ├── CategoryMsetRepository.java
 │   │   └── MsetRepository.java
 │   └── service
+│       ├── CategoryMsetService.java
 │       └── MsetService.java
 ├── socket
 │   ├── config
@@ -116,7 +128,9 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 │       └── SocketService.java
 ├── task
 │   ├── api
+│   │   ├── TaskApi.java
 │   │   ├── TaskApiController.java
+│   │   ├── TimerApi.java
 │   │   └── TimerApiController.java
 │   ├── domain
 │   │   ├── Task.java
@@ -127,15 +141,23 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 │   ├── dto
 │   │   ├── FetchTitleRequest.java
 │   │   ├── FetchTitleResponse.java
+│   │   ├── StartTimerRequest.java
 │   │   ├── StopTimerRequest.java
+│   │   ├── TaskCreateRequest.java
+│   │   ├── TaskInTodoCard.java
+│   │   ├── TodoCardResponse.java
 │   │   └── TotalTimeTodayResponse.java
 │   ├── repository
 │   │   ├── TaskRepository.java
 │   │   ├── TaskTimerRepository.java
+│   │   ├── TodoRepository.java
+│   │   ├── TodoTaskRepository.java
 │   │   └── UserTimerRepository.java
 │   └── service
 │       ├── TaskService.java
 │       ├── TaskTimerService.java
+│       ├── TodoService.java
+│       ├── TodoTaskService.java
 │       └── UserTimerService.java
 └── user
     ├── api
