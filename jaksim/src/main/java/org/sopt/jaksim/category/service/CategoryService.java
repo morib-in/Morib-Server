@@ -85,9 +85,10 @@ public class CategoryService {
 
     public boolean isContains(CategoryCheckResponse categoryCheckResponse, LocalDate idxDate) {
         if (categoryCheckResponse.endDate() == null) {
-
+            return categoryCheckResponse.startDate().isBefore(idxDate) ||
+                    categoryCheckResponse.startDate().equals(idxDate);
         }
-        return (categoryCheckResponse.startDate().isBefore(idxDate) &&
+        else return (categoryCheckResponse.startDate().isBefore(idxDate) &&
                 categoryCheckResponse.endDate().isAfter(idxDate)) ||
                 categoryCheckResponse.startDate().equals(idxDate) ||
                 categoryCheckResponse.endDate().equals(idxDate);
