@@ -8,6 +8,7 @@ import org.sopt.jaksim.category.dto.CategoryTaskLink;
 import org.sopt.jaksim.category.dto.FilteredResourceResponse;
 import org.sopt.jaksim.category.dto.TaskWithTaskTimer;
 import org.sopt.jaksim.category.service.CategoryService;
+import org.sopt.jaksim.category.service.CategoryTaskService;
 import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.domain.TaskTimer;
 import org.sopt.jaksim.task.service.TaskService;
@@ -28,6 +29,7 @@ public class CategoryTaskFacade {
     private final TaskService taskService;
     private final CategoryService categoryService;
     private final TaskTimerService taskTimerService;
+    private final CategoryTaskService categoryTaskService;
 
     public List<FilteredResourceResponse> getAllResources(LocalDate startDate, LocalDate endDate) {
 //        User user = userFacade.getUserByPrincipal();
@@ -63,6 +65,15 @@ public class CategoryTaskFacade {
             idxDate = idxDate.plusDays(1);
         }
         return res;
+    }
+
+    public void delete(Long categoryId) {
+        categoryService.delete(categoryId);
+    }
+    public void deleteCategoryTaskAndTasks(Long categoryId) {
+        // CategoryTask -> Task 순으로 삭제
+        List<Long> taskIdList = categoryTaskService.deleteAndGetTaskIdList(categoryId);
+        taskService.delete(taskIdList);
     }
 
 }

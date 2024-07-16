@@ -18,4 +18,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     List<Category> findByUserIdWithRange(Long userId, LocalDate idxStartDate, LocalDate idxEndDate);
 
     Optional<List<Category>> findByUserId(Long userId);
+
+
 }

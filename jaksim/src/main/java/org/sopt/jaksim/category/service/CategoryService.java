@@ -94,7 +94,6 @@ public class CategoryService {
                 categoryCheckResponse.endDate().equals(idxDate);
     }
 
-
     public List<CategoryCheckResponse> getCategoriesByUserId() {
         // userId -> user pk -> Long -> SecurityContextHolder Authentication 객체
         // principal handler
@@ -108,5 +107,13 @@ public class CategoryService {
                 .map(category -> CategoryCheckResponse.of(category.getId(), category.getName(), category.getStartDate(), category.getEndDate()))
                 .collect(Collectors.toList()); //변환된 스트림을 리스트로 수집
     }
+
+    public void delete(Long categoryId) {
+        categoryRepository.findById(categoryId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        );
+        categoryRepository.deleteById(categoryId);
+    }
+
 }
 
