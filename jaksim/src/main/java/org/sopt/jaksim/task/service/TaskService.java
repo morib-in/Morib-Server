@@ -32,7 +32,11 @@ public class TaskService {
     }
 
     public boolean isContains(TaskWithTaskTimer taskWithTaskTimer, LocalDate idxDate) {
-        return taskWithTaskTimer.startDate().equals(idxDate) || // startDate = idxDate
+        if (taskWithTaskTimer.endDate() == null) {
+            return taskWithTaskTimer.startDate().isBefore(idxDate) ||
+                    taskWithTaskTimer.startDate().equals(idxDate);
+        }
+        else return taskWithTaskTimer.startDate().equals(idxDate) || // startDate = idxDate
                 taskWithTaskTimer.endDate().equals(idxDate) || // endDate = idxDate
                 (taskWithTaskTimer.startDate().isBefore(idxDate) && taskWithTaskTimer.endDate().isAfter(idxDate)); // startDate, endDate가 idxDate를 포함
     }
