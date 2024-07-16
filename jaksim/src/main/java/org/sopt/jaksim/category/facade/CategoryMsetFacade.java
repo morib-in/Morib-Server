@@ -32,4 +32,13 @@ public class CategoryMsetFacade {
         return CategoryMsetLinkResponse.of(category, msetList);
     }
 
+    public void deleteCategoryMsetAndMsets(Long categoryId) {
+        List<Long> msetIdList = categoryMsetService.deleteAndGetMsetIdList(categoryId);
+        deleteMsetById(msetIdList);
+    }
+
+    public void deleteMsetById(List<Long> msetIdList) {
+        msetService.delete(msetIdList);
+    }
+
 }

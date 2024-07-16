@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.jaksim.category.dto.CategoryCheckResponse;
 import org.sopt.jaksim.category.dto.CategoryCreateRequest;
 import org.sopt.jaksim.category.dto.FilteredResourceResponse;
+import org.sopt.jaksim.category.facade.CategoryMsetFacade;
 import org.sopt.jaksim.category.service.CategoryService;
 import org.sopt.jaksim.category.facade.CategoryTaskFacade;
 import org.sopt.jaksim.global.common.ApiResponseUtil;
@@ -25,6 +26,7 @@ import java.util.List;
 public class CategoryApiController implements CategoryApi {
     private final CategoryService categoryService;
     private final CategoryTaskFacade categoryTaskFacade;
+    private final CategoryMsetFacade categoryMsetFacade;
 
     @PostMapping("/categories")
     @Override
@@ -46,5 +48,13 @@ public class CategoryApiController implements CategoryApi {
     public ResponseEntity<BaseResponse<?>> getCategoriesByUserId() {
         List<CategoryCheckResponse> categories = categoryService.getCategoriesByUserId(); // categoryRepository를 통해 데이터베이스에서 특정 사용자의 카테고리를 조회
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, categories); // 성공 응답 반환
+    }
+
+    @DeleteMapping("/categories/{categoryId}")
+    public ResponseEntity<BaseResponse<?>> delete(@PathVariable("categoryId") Long categoryId) {
+        categoryTaskFacade.deleteCategoryTaskAndTasks(categoryId);
+        categoryMsetFacade.deleteCategoryMsetAndMsets(categoryId);
+        categoryTaskFacade.delete(categoryId);
+        return ApiResponseUtil.success(SuccessMessage.SUCCESS);
     }
 }

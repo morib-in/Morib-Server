@@ -69,4 +69,12 @@ public class TaskService {
         return taskRepository.findAllById(taskIdList);
     }
 
+    public void delete(List<Long> taskIdList) {
+        List<Task> taskList = taskRepository.findAllById(taskIdList);
+        if (taskList.isEmpty()) {
+            throw new NotFoundException(ErrorMessage.NOT_FOUND);
+        }
+        taskRepository.deleteAll(taskList);
+    }
+
 }

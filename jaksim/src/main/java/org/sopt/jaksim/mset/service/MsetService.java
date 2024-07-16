@@ -32,5 +32,14 @@ public class MsetService {
     public Mset getMsetById(Long msetId) {
         return msetRepository.findById(msetId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.NOT_FOUND)
-        );    }
+        );
+    }
+
+    public void delete(List<Long> msetIdList) {
+        List<Mset> msetList = msetRepository.findAllById(msetIdList);
+        if (msetIdList.isEmpty()) {
+            throw new NotFoundException(ErrorMessage.NOT_FOUND);
+        }
+        msetRepository.deleteAll(msetList);
+    }
 }
