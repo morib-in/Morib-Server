@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "categories")
 @Entity
 public class Category extends BaseTimeEntity {
     @Id
