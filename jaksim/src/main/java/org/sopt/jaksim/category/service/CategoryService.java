@@ -46,7 +46,7 @@ public class CategoryService {
                 categoryCreateRequest.name(),
 //                userFacade.getUserByPrincipal().getId(),
                 3L,
-                categoryCreateRequest.startDate(),
+                categoryCreateRequest.startDate() == null ? LocalDate.now() : categoryCreateRequest.startDate(),
                 categoryCreateRequest.endDate());
         category = categoryRepository.save(category);
         msetService.createByCategory(categoryCreateRequest, category.getId());
