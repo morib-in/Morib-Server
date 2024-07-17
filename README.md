@@ -24,6 +24,8 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 |[@geniusYoo](https://github.com/geniusYoo)|[@eunseo5343](https://github.com/eunseo5343)|
 |Lead, 인프라, 타이머 API 개발|홈 API 개발| 
 
+![image](https://github.com/user-attachments/assets/2608a1ac-e699-4dfc-908f-4872fed6b7d7)
+
 
 <br>
 
