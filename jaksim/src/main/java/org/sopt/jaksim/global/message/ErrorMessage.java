@@ -40,6 +40,8 @@ public enum ErrorMessage {
     /**
      * 405 Method Not Allowed
      */
+    METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "e4050", "잘못된 HTTP method 요청입니다."),
+
 
     /**
      * 409 Conflict
@@ -48,6 +50,7 @@ public enum ErrorMessage {
     /**
      * 500 Internal Server Error
      */
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "e5000", "서버 내부 오류입니다.");
     ;
 
     private final HttpStatus httpStatus;

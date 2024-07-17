@@ -84,7 +84,7 @@ public class UserService {
         String refreshToken = issueRefreshTokenByUserId(user.getId());
 
         // redis에 rtk 저장
-        redisTokenRepository.save(RefreshToken.of(user.getId(), refreshToken));
+//        redisTokenRepository.save(RefreshToken.of(user.getId(), refreshToken));
         updateRefreshToken(refreshToken, user);
         return UserSignInResponse.of(accessToken, refreshToken, user.getId().toString());
     }
