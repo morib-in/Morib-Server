@@ -40,7 +40,7 @@ public class TaskApiController implements TaskApi {
         }
     }
 
-    @PostMapping("/categories/{categoryId}")
+    @PostMapping("/tasks/{categoryId}")
     @Override
     public ResponseEntity<BaseResponse<?>> create(@PathVariable("categoryId") Long categoryId,
                                                   @RequestBody TaskCreateRequest taskCreateRequest) {

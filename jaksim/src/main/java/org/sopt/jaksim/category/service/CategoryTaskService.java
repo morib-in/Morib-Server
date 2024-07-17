@@ -28,4 +28,10 @@ public class CategoryTaskService {
         categoryTaskRepository.deleteAll(categoryTaskList);
         return taskIdList;
     }
+
+    public Long getCategoryIdTaskByTaskId(Long taskId) {
+        return categoryTaskRepository.findByTaskId(taskId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        ).getCategoryId();
+    }
 }

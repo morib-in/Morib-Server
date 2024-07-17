@@ -7,12 +7,14 @@ import org.sopt.jaksim.category.dto.CategoryMsetLinkResponse;
 import org.sopt.jaksim.category.service.CategoryService;
 import org.sopt.jaksim.mset.domain.CategoryMset;
 import org.sopt.jaksim.mset.domain.Mset;
+import org.sopt.jaksim.mset.dto.MsetOfTask;
 import org.sopt.jaksim.mset.service.CategoryMsetService;
 import org.sopt.jaksim.mset.service.MsetService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,6 +41,13 @@ public class CategoryMsetFacade {
 
     public void deleteMsetById(List<Long> msetIdList) {
         msetService.delete(msetIdList);
+    }
+
+    public List<MsetOfTask> getFromCategory(Long categoryId) {
+        return getFromOtherCategory(categoryId).msetList().stream().map(
+                mset -> MsetOfTask.of(mset.getId(), mset.getName(), mset.getUrl())
+        ).collect(Collectors.toList());
+
     }
 
 }

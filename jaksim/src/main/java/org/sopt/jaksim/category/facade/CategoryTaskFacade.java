@@ -3,6 +3,7 @@ package org.sopt.jaksim.category.facade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sopt.jaksim.category.domain.Category;
+import org.sopt.jaksim.category.domain.CategoryTask;
 import org.sopt.jaksim.category.dto.CategoryCheckResponse;
 import org.sopt.jaksim.category.dto.CategoryTaskLink;
 import org.sopt.jaksim.category.dto.FilteredResourceResponse;
@@ -70,10 +71,16 @@ public class CategoryTaskFacade {
     public void delete(Long categoryId) {
         categoryService.delete(categoryId);
     }
+
     public void deleteCategoryTaskAndTasks(Long categoryId) {
         // CategoryTask -> Task 순으로 삭제
         List<Long> taskIdList = categoryTaskService.deleteAndGetTaskIdList(categoryId);
         taskService.delete(taskIdList);
     }
 
+
+
+    public Long getCategoryIdByCategoryTask(Long taskId) {
+        return categoryTaskService.getCategoryIdTaskByTaskId(taskId);
+    }
 }
