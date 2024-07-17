@@ -2,11 +2,14 @@ package org.sopt.jaksim.task.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.sopt.jaksim.category.domain.Category;
 import org.sopt.jaksim.category.domain.CategoryTask;
 import org.sopt.jaksim.category.dto.TaskWithTaskTimer;
 import org.sopt.jaksim.category.repository.CategoryTaskRepository;
 import org.sopt.jaksim.global.exception.NotFoundException;
 import org.sopt.jaksim.global.message.ErrorMessage;
+import org.sopt.jaksim.mset.repository.TaskMsetRepository;
+import org.sopt.jaksim.mset.service.MsetService;
 import org.sopt.jaksim.task.domain.Task;
 import org.sopt.jaksim.task.dto.TaskCreateRequest;
 import org.sopt.jaksim.task.domain.TodoTask;
@@ -24,6 +27,9 @@ import java.util.stream.Collectors;
 public class TaskService {
     private final TaskRepository taskRepository;
     private final CategoryTaskRepository categoryTaskRepository;
+    private final TaskMsetRepository taskMsetRepository;
+    private final MsetService msetService;
+    private final TaskService taskService;
 
     public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId).orElseThrow(
@@ -64,5 +70,4 @@ public class TaskService {
         List<Long> taskIdList = todoTaskList.stream().map(TodoTask::getTaskId).collect(Collectors.toList());
         return taskRepository.findAllById(taskIdList);
     }
-
 }
