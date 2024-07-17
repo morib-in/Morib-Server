@@ -84,7 +84,9 @@ public class TodoService {
                         TaskInTodoCard.of(
                                 task,
                                 taskTimerMap.get(task.getId()),
-                                categoryService.getCategoryById(categoryTaskRepository.findByTaskId(task.getId()).getCategoryId()),
+                                categoryService.getCategoryById(categoryTaskRepository.findByTaskId(task.getId()).orElseThrow(
+                                        () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+                                ).getCategoryId()),
                                 todoTaskMap.get(task.getId()).getTaskOrder()));
             }
         }
