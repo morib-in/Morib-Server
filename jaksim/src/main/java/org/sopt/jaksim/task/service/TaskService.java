@@ -46,7 +46,7 @@ public class TaskService {
     public void create(Long categoryId, TaskCreateRequest taskCreateRequest) {
         Task task = Task.create(
                 taskCreateRequest.name(),
-                taskCreateRequest.startDate(),
+                taskCreateRequest.startDate() == null ? LocalDate.now() : taskCreateRequest.startDate(),
                 taskCreateRequest.endDate());
 
         task = taskRepository.save(task);
