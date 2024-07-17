@@ -8,6 +8,7 @@ import org.sopt.jaksim.category.repository.CategoryTaskRepository;
 import org.sopt.jaksim.global.exception.NotFoundException;
 import org.sopt.jaksim.global.message.ErrorMessage;
 import org.sopt.jaksim.task.domain.Task;
+import org.sopt.jaksim.task.domain.TaskTimer;
 import org.sopt.jaksim.task.dto.TaskCreateRequest;
 import org.sopt.jaksim.task.domain.TodoTask;
 import org.sopt.jaksim.task.repository.TaskRepository;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 public class TaskService {
     private final TaskRepository taskRepository;
     private final CategoryTaskRepository categoryTaskRepository;
+    private final TaskTimerService taskTimerService;
 
     public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId).orElseThrow(
@@ -54,6 +56,8 @@ public class TaskService {
                 task.getId());
 
         categoryTaskRepository.save(categoryTask);
+
+        taskTimerService.createTaskTimer(task.getId());
     }
 
     public void toggleTaskCompletionStatus(Long taskId) {

@@ -23,6 +23,9 @@ public class TaskTimerService {
     private final TaskTimerRepository taskTimerRepository;
     private final UserFacade userFacade;
 
+    public void createTaskTimer(Long taskId) {
+        taskTimerRepository.save(TaskTimer.create(3L, taskId));
+    }
     public void calculateTaskTimerOnStop(Long taskId, StopTimerRequest stopTimerRequest) {
 //        userFacade.getUserByPrincipal().getId()
         TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(3L, stopTimerRequest.targetDate(), taskId).orElseThrow(
