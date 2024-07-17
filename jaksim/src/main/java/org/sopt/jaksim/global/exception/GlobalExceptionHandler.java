@@ -8,9 +8,11 @@ import org.sopt.jaksim.global.exception.NotFoundException;
 import org.sopt.jaksim.global.exception.UnauthorizedException;
 import org.sopt.jaksim.global.message.ErrorMessage;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Slf4j
 @RestControllerAdvice
@@ -57,4 +59,18 @@ public class GlobalExceptionHandler {
         log.error(">>> handle: DateTimeParseException ", e);
         return ApiResponseUtil.failure(ErrorMessage.INVALID_GRANT_BY_OAUTH);
     }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    protected ResponseEntity<BaseResponse<?>> handleHttpRequestMethodNotSupportedException(final HttpRequestMethodNotSupportedException e) {
+        log.error(">>> handle: HttpRequestMethodNotSupportedException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.METHOD_NOT_ALLOWED);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    protected ResponseEntity<BaseResponse<?>> handleMethodArgumentTypeMismatchException(final MethodArgumentTypeMismatchException e) {
+        log.error(">>> handle: MethodArgumentTypeMismatchException ", e);
+        return ApiResponseUtil.failure(ErrorMessage.BAD_REQUEST);
+    }
+
+
 }
