@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -26,6 +27,7 @@ public class TaskTimerService {
     public void createTaskTimer(Long taskId) {
         taskTimerRepository.save(TaskTimer.create(3L, taskId));
     }
+
     public void calculateTaskTimerOnStop(Long taskId, StopTimerRequest stopTimerRequest) {
 //        userFacade.getUserByPrincipal().getId()
         TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(3L, stopTimerRequest.targetDate(), taskId).orElseThrow(
@@ -41,9 +43,8 @@ public class TaskTimerService {
     }
 
     public int getTaskTimeByTaskId(Long userId, LocalDate targetDate, Long taskId) {
-        TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(userId, targetDate, taskId).orElseThrow(
-                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
-        );
-        return taskTimer.getTargetTime();
+        TaskTimer taskTimer = taskTimerRepository.findByUserIdAndTargetDateAndTaskId(userId, targetDate, taskId).orElse(null);
+        if (taskTimer == null) return 0;
+        else return taskTimer.getTargetTime();
     }
 }

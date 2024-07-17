@@ -56,8 +56,6 @@ public class TaskService {
                 task.getId());
 
         categoryTaskRepository.save(categoryTask);
-
-        taskTimerService.createTaskTimer(task.getId());
     }
 
     public void toggleTaskCompletionStatus(Long taskId) {
