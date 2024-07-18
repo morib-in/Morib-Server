@@ -36,7 +36,9 @@ public class CategoryMsetFacade {
 
     public void deleteCategoryMsetAndMsets(Long categoryId) {
         List<Long> msetIdList = categoryMsetService.deleteAndGetMsetIdList(categoryId);
-        deleteMsetById(msetIdList);
+        if (msetIdList != null) { // 카테고리에 등록된 모립세트가 있을 경우에만 delete
+            deleteMsetById(msetIdList);
+        }
     }
 
     public void deleteMsetById(List<Long> msetIdList) {

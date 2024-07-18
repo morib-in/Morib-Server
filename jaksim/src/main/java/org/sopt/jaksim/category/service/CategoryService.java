@@ -115,5 +115,11 @@ public class CategoryService {
         categoryRepository.deleteById(categoryId);
     }
 
+    public Category isExist(Long categoryId) {
+        return categoryRepository.findById(categoryId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.NOT_FOUND)
+        );
+    }
+
 }
 
