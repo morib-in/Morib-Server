@@ -51,6 +51,7 @@ public class CategoryApiController implements CategoryApi {
     }
 
     @DeleteMapping("/categories/{categoryId}")
+    @Override
     public ResponseEntity<BaseResponse<?>> delete(@PathVariable("categoryId") Long categoryId) {
         categoryService.isExist(categoryId);
         categoryTaskFacade.deleteCategoryTaskAndTasks(categoryId);
