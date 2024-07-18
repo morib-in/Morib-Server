@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -59,6 +60,7 @@ public class CategoryTaskFacade {
                             taskWithTaskTimerList.add(TaskWithTaskTimer.ofByInit(task, taskTimerService.getTaskTimeByTaskId(3L, idxDate, task.id()), task.isComplete()));
                         }
                     }
+                    taskWithTaskTimerList.sort(Comparator.comparing(TaskWithTaskTimer::id).reversed());
                     target.categoryTaskLinkList().add(CategoryTaskLink.of(categoryTaskLink.categoryCheckResponse(), taskWithTaskTimerList));
                 }
             }
