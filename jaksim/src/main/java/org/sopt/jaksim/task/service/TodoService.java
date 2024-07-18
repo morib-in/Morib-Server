@@ -45,7 +45,7 @@ public class TodoService {
         Long userId = 3L;
         Todo todo = Todo.init(userId);
         // 해당 날짜에 생성한 Todo가 없다면
-        if (!isExist(targetDate)) {
+        if (!isExist(userId, targetDate)) {
             // Todo 생성
             todo.setTargetDate(targetDate);
             todo = todoRepository.save(todo);
@@ -57,8 +57,8 @@ public class TodoService {
         todoTaskService.excute(todo, startTimerRequest.taskIdList());
     }
 
-    public boolean isExist(LocalDate targetDate) {
-        return todoRepository.findByTargetDate(targetDate) != null;
+    public boolean isExist(Long userId, LocalDate targetDate) {
+        return todoRepository.findByUserIdAndTargetDate(userId, targetDate) != null;
     }
 
     public TodoCardResponse getTodoCard(LocalDate targetDate) {
