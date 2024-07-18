@@ -25,8 +25,8 @@ public class CategoryMsetService {
     public List<Long> deleteAndGetMsetIdList(Long categoryId) {
         List<CategoryMset> categoryMsetList = getByCategoryId(categoryId);
         List<Long> msetIdList = categoryMsetList.stream().map(CategoryMset::getMsetId).collect(Collectors.toList());
-        if (categoryMsetList.isEmpty()) {
-            throw new NotFoundException(ErrorMessage.NOT_FOUND);
+        if (categoryMsetList.isEmpty()) { // 카테고리에 등록된 모립세트가 없는 경우
+            return null;
         }
         categoryMsetRepository.deleteAll(categoryMsetList);
         return msetIdList;
