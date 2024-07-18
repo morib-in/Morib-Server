@@ -35,6 +35,7 @@ public class MsetApiController implements MsetApi {
     }
 
     @GetMapping("/mset/tasks/{taskId}")
+    @Override
     public ResponseEntity<BaseResponse<?>> getFromOtherTask(@PathVariable("taskId") Long taskId) {
         List<MsetOfTask> response = categoryMsetFacade.getFromCategory(categoryTaskFacade.getCategoryIdByCategoryTask(taskId));
         return ApiResponseUtil.success(SuccessMessage.SUCCESS, response);
