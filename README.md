@@ -28,169 +28,57 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 
 ## 🗂️ Foldering
 ```
-├── JaksimApplication.java
-├── auth
-│   ├── PrincipalHandler.java
-│   ├── SecurityConfig.java
-│   ├── UserAuthentication.java
-│   ├── WebSecurityConfig.java
-│   ├── filter
-│   │   ├── CustomAccessDeniedHandler.java
-│   │   ├── CustomJwtAuthenticationEntryPoint.java
-│   │   └── JwtAuthenticationFilter.java
-│   └── jwt
-│       ├── JwtTokenProvider.java
-│       └── JwtValidationType.java
-├── category
-│   ├── api
-│   │   ├── CategoryApi.java
-│   │   └── CategoryApiController.java
-│   ├── domain
-│   │   ├── Category.java
-│   │   └── CategoryTask.java
-│   ├── dto
-│   │   ├── CategoryCheckResponse.java
-│   │   ├── CategoryCreateRequest.java
-│   │   ├── CategoryMsetLinkResponse.java
-│   │   ├── CategoryTaskLink.java
-│   │   ├── FilteredResourceResponse.java
-│   │   └── TaskWithTaskTimer.java
-│   ├── facade
-│   │   ├── CategoryMsetFacade.java
-│   │   └── CategoryTaskFacade.java
-│   ├── repository
-│   │   ├── CategoryRepository.java
-│   │   └── CategoryTaskRepository.java
-│   └── service
-│       ├── CategoryService.java
-│       └── CategoryTaskService.java
-├── global
-│   ├── common
-│   │   ├── ApiResponseUtil.java
-│   │   ├── BaseResponse.java
-│   │   ├── BaseTimeEntity.java
-│   │   ├── Constants.java
-│   │   ├── DateUtil.java
-│   │   ├── HealthCheckController.java
-│   │   ├── LoggingFilter.java
-│   │   └── S3Service.java
-│   ├── config
-│   │   ├── AwsConfig.java
-│   │   ├── JpaAuditingConfig.java
-│   │   ├── RedisConfig.java
-│   │   └── SwaggerConfig.java
-│   ├── exception
-│   │   ├── BusinessException.java
-│   │   ├── DateTimeParseException.java
-│   │   ├── ForbiddenException.java
-│   │   ├── GlobalExceptionHandler.java
-│   │   ├── IOException.java
-│   │   ├── InvalidValueException.java
-│   │   ├── NotFoundException.java
-│   │   ├── OAuthException.java
-│   │   └── UnauthorizedException.java
-│   └── message
-│       ├── ErrorMessage.java
-│       └── SuccessMessage.java
-├── mset
-│   ├── api
-│   │   ├── MsetApi.java
-│   │   └── MsetApiController.java
-│   ├── domain
-│   │   ├── CategoryMset.java
-│   │   ├── Mset.java
-│   │   └── TaskMset.java
-│   ├── repository
-│   │   ├── CategoryMsetRepository.java
-│   │   └── MsetRepository.java
-│   └── service
-│       ├── CategoryMsetService.java
-│       └── MsetService.java
-├── socket
-│   ├── config
-│   │   ├── SocketIoConfig.java
-│   │   ├── SocketIoServerLifeCycle.java
-│   │   └── SocketModule.java
-│   ├── controller
-│   │   ├── MessageController.java
-│   │   └── SocketIOController.java
-│   ├── dto
-│   │   ├── WebSocketRequest.java
-│   │   └── WebSocketResponse.java
-│   ├── message
-│   │   ├── Message.java
-│   │   └── MessageType.java
-│   ├── repository
-│   │   └── RedisSocketMessageRepository.java
-│   └── service
-│       ├── MessageService.java
-│       └── SocketService.java
-├── task
-│   ├── api
-│   │   ├── TaskApi.java
-│   │   ├── TaskApiController.java
-│   │   ├── TimerApi.java
-│   │   └── TimerApiController.java
-│   ├── domain
-│   │   ├── Task.java
-│   │   ├── TaskTimer.java
-│   │   ├── Todo.java
-│   │   ├── TodoTask.java
-│   │   └── UserTimer.java
-│   ├── dto
-│   │   ├── FetchTitleRequest.java
-│   │   ├── FetchTitleResponse.java
-│   │   ├── StartTimerRequest.java
-│   │   ├── StopTimerRequest.java
-│   │   ├── TaskCreateRequest.java
-│   │   ├── TaskInTodoCard.java
-│   │   ├── TodoCardResponse.java
-│   │   └── TotalTimeTodayResponse.java
-│   ├── repository
-│   │   ├── TaskRepository.java
-│   │   ├── TaskTimerRepository.java
-│   │   ├── TodoRepository.java
-│   │   ├── TodoTaskRepository.java
-│   │   └── UserTimerRepository.java
-│   └── service
-│       ├── TaskService.java
-│       ├── TaskTimerService.java
-│       ├── TodoService.java
-│       ├── TodoTaskService.java
-│       └── UserTimerService.java
-└── user
-    ├── api
-    │   ├── SocialLoginTempController.java
-    │   ├── UserApi.java
-    │   └── UserApiController.java
-    ├── domain
-    │   ├── Permission.java
-    │   ├── PermissionLevel.java
-    │   ├── Platform.java
-    │   ├── RefreshToken.java
-    │   └── User.java
-    ├── dto
-    │   ├── Tokens.java
-    │   ├── UserInfo.java
-    │   ├── request
-    │   │   ├── UserReissueRequest.java
-    │   │   ├── UserSignInRequest.java
-    │   │   └── UserSignUpRequest.java
-    │   └── response
-    │       ├── UserSignInResponse.java
-    │       └── UserSignUpResponse.java
-    ├── facade
-    │   └── UserFacade.java
-    ├── repository
-    │   ├── RedisTokenRepository.java
-    │   └── UserRepository.java
-    └── service
-        └── UserService.java
+📦src/main/java/org/jaksim
+ ┣ 📂auth
+ ┃ ┣ 📂filter
+ ┃ ┣ 📂jwt
+ ┣ 📂category
+ ┃ ┣ 📂api
+ ┃ ┣ 📂domain
+ ┃ ┣ 📂dto
+ ┃ ┣ 📂facade
+ ┃ ┣ 📂repository
+ ┃ ┗ 📂service
+ ┣ 📂global
+ ┃ ┣ 📂common
+ ┃ ┣ 📂config
+ ┃ ┣ 📂exception
+ ┃ ┗ 📂message
+ ┣ 📂mset
+ ┃ ┣ 📂api
+ ┃ ┣ 📂domain
+ ┃ ┣ 📂dto
+ ┃ ┣ 📂repository
+ ┃ ┗ 📂service
+ ┣ 📂socket
+ ┃ ┣ 📂config
+ ┃ ┣ 📂controller
+ ┃ ┣ 📂dto
+ ┃ ┣ 📂message
+ ┃ ┣ 📂repository
+ ┃ ┗ 📂service
+ ┣ 📂task
+ ┃ ┣ 📂api
+ ┃ ┣ 📂domain
+ ┃ ┣ 📂dto
+ ┃ ┣ 📂repository
+ ┃ ┗ 📂service
+ ┣ 📂user
+ ┃ ┣ 📂api
+ ┃ ┣ 📂domain
+ ┃ ┣ 📂dto
+ ┃ ┣ 📂facade
+ ┃ ┣ 📂repository
+ ┃ ┗ 📂service
+ ┗ 📜JaksimApplication.java
 ```
 
 <br>
 
 ## 📉 Architecture
+
+![image](https://github.com/user-attachments/assets/eec8277f-5fb6-411c-8586-b29474f73532)
+
 |IDE|IntelliJ|
 |:--|:--|
 |Language|Spring Boot, Gradle|
@@ -199,7 +87,7 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 |CI/CD|Github Action|
 
 
-![image](https://github.com/user-attachments/assets/eec8277f-5fb6-411c-8586-b29474f73532)
+
 
 
 
