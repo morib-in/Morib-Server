@@ -22,7 +22,7 @@ _당신의 온전한 몰입을 도와줄 작업 공간, **Morib**_
 |:--:|:--:|
 |**영재**|**은서**|
 |[@geniusYoo](https://github.com/geniusYoo)|[@eunseo5343](https://github.com/eunseo5343)|
-|Lead, 인프라, 타이머 API 개발|홈 API 개발| 
+|Lead, Backend|Backend| 
 
 <br>
 
