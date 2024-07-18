@@ -75,7 +75,9 @@ public class CategoryTaskFacade {
     public void deleteCategoryTaskAndTasks(Long categoryId) {
         // CategoryTask -> Task 순으로 삭제
         List<Long> taskIdList = categoryTaskService.deleteAndGetTaskIdList(categoryId);
-        taskService.delete(taskIdList);
+        if (taskIdList != null) { // 카테고리에 등록된 태스크가 있는 경우에만 delete
+            taskService.delete(taskIdList);
+        }
     }
 
 

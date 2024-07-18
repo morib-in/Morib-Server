@@ -19,8 +19,8 @@ public class CategoryTaskService {
 
     public List<Long> deleteAndGetTaskIdList(Long categoryId) {
         List<CategoryTask> categoryTaskList = categoryTaskRepository.findByCategoryId(categoryId);
-        if (categoryTaskList.isEmpty()) {
-            throw new NotFoundException(ErrorMessage.NOT_FOUND);
+        if (categoryTaskList.isEmpty()) { // 카테고리에 등록된 태스크가 없는 경우
+            return null;
         }
         List<Long> taskIdList = categoryTaskList.stream()
                 .map(CategoryTask::getTaskId).
