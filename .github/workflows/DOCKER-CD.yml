@@ -61,9 +61,9 @@ jobs:
       - name: docker 컨테이너 실행
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.NEW_SERVER_IP }}
-          username: ${{ secrets.NEW_SERVER_USER }}
-          key: ${{ secrets.NEW_SERVER_KEY }}
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
           script: |
             cd ~
             ./deploy.sh
