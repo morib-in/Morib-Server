@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface TaskTimerRepository extends JpaRepository<TaskTimer, Long> {
     List<TaskTimer> findByUserIdAndTargetDateAndTaskIdIn(Long userId, LocalDate targetDate, List<Long> taskId);
     Optional<TaskTimer> findByUserIdAndTargetDateAndTaskId(Long userId, LocalDate targetDate, Long taskId);
+    List<TaskTimer> findByUserIdAndTargetDate(Long userId, LocalDate targetDate);
+
 }
