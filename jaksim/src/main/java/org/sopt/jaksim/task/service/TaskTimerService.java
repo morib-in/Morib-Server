@@ -47,4 +47,8 @@ public class TaskTimerService {
         if (taskTimer == null) return 0;
         else return taskTimer.getTargetTime();
     }
+
+    public boolean isExistByTaskIdAndTargetDate(Long taskId, LocalDate targetDate) {
+        return taskTimerRepository.findByUserIdAndTargetDateAndTaskId(3L, targetDate, taskId).isPresent();
+    }
 }
