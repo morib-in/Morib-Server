@@ -21,10 +21,13 @@ import org.sopt.jaksim.task.repository.TaskTimerRepository;
 import org.sopt.jaksim.task.service.TaskService;
 import org.sopt.jaksim.user.domain.User;
 import org.sopt.jaksim.user.facade.UserFacade;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,10 +105,14 @@ public class CategoryService {
         List<Category> categories = categoryRepository.findByUserId(userId).orElseThrow(
                 () -> new NotFoundException(ErrorMessage.NOT_FOUND)
         );
-        return categories.stream() //리스트를 스트림으로 변환
+//        categories.sort(Comparator.comparing(Category::getName));
+        List<CategoryCheckResponse> categoryCheckResponseList = categories.stream() //리스트를 스트림으로 변환
                 //각 category 객체를 CategoryCheckResponse 객체로 변환
                 .map(category -> CategoryCheckResponse.of(category.getId(), category.getName(), category.getStartDate(), category.getEndDate()))
                 .collect(Collectors.toList()); //변환된 스트림을 리스트로 수집
+        categoryCheckResponseList.sort(Comparator.comparing(CategoryCheckResponse::name));
+        return categoryCheckResponseList;
+
     }
 
     public void delete(Long categoryId) {
